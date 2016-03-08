@@ -1,0 +1,41 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+In many cases, we need to perform calculations on whether a particular IP address is in a certain range , playing the role of a rudimentary firewall.
+
+Several times complex algorithms are made to solve this problem . An IP address can always be treated as a numerical value before saving it in my database. Now we can perform selects query the type :
+&nbsp; &nbsp; SELECT * FROM TBL WHERE IP BETWEEN 3232235530 AND 3232235774
+Or selects like this :
+&nbsp; &nbsp; SELECT * FROM TBL WHERE IN IP ( 3232235530, 3232235774 )
+
+So let's get to it.
+
+I IPV4 address has 4 octets , each octet containing 1 byte in size, which gives a total of 32 bits in size ,
+
+As each byte of the size of byte, each byte can go from 0 (00000000 in binary) to 255 (11111111 in binary) , or 256 possible values ​​in each octet.
+
+11111111.11111111.11111111.11111111
+
+Knowing that, we have the positions of each octet ,
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-fJR-dcAwFG8/Ukr2zO0b1cI/AAAAAAAAA9Y/x0yS9zoVqW0/s1600/sdfsdfsdfsdfsdf.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="130" src="https://1.bp.blogspot.com/-fJR-dcAwFG8/Ukr2zO0b1cI/AAAAAAAAA9Y/x0yS9zoVqW0/s1600/sdfsdfsdfsdfsdf.png" width="400" /></a></div>
+
+
+Thus to calculate a numeric IP value simply proceed as follows:
+
+
+The numerical value of the IP address 192.168.0.110 can be obtained by
+
+192 * (256 ^ 3) + 168 * (256 ^ 2) + 0 * (256 ^ 1) + 110 * (256 ^ 0) =
+192 * (16777216) + 168 * (65536) + 0 * (256) + 110 * (1) = 3232235630
+
+The reverse process is nothing more than changing the base number of the number found to binary , separate the octets and change the binary value to decimal value of each octet . in other words
+
+3232235630 =&gt; 11000000101010000000000001101110 =&gt;
+11000000.10101000.00000000.01101110 =&gt;
+
+<div class="separator" style="clear: both; text-align: center;">
+<img border="0" height="175" src="https://4.bp.blogspot.com/-0x2QjDAHoRk/Ukr4Jipd0DI/AAAAAAAAA9k/8aeVTLWPo1g/s1600/Untitled.png" width="400" /></div>
+
+Which finally returned to the same IP:
+
+192.168.0.110</div>
