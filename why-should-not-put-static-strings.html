@@ -1,0 +1,52 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+The answer for this question is very very simple:
+
+When we put strings directly in the code the compiler does not perform any additional processing for impairs the location of this string in the compiled object. This allows someone who has access to the executable of our program be able to easily find those information, some times even critical information, about our program. Let me show you how this can happen:
+
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-IdEXpHa45k0/Ula1aj9FIWI/AAAAAAAABAU/eUoLxnZi32I/s1600/img03.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="143" src="https://1.bp.blogspot.com/-IdEXpHa45k0/Ula1aj9FIWI/AAAAAAAABAU/eUoLxnZi32I/s1600/img03.png" width="400" /></a></div>
+<span style="font-size: xx-small;">Well, dont tell me my code can be attacked with a buffer overflow strategy, because i know :), this will be explained in a next post. :)</span>
+
+How you can see the previous code has two strings hard coded into the program, and those strings have precious informations about our target. But, we dont have access to the source code of this application, we only have the access to the binary generated for this code. Well, it is very good for me. Let me show you why:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-fhzz56e9yKs/Ulat_BP0--I/AAAAAAAAA_w/JdbPMkJg7tI/s1600/img00.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="82" src="https://4.bp.blogspot.com/-fhzz56e9yKs/Ulat_BP0--I/AAAAAAAAA_w/JdbPMkJg7tI/s1600/img00.png" width="400" /></a></div>
+
+In this picture we execute the program and try input a wrong password and right password, and the program runs correctly.
+
+But, using the <a href="http://www.gnu.org/software/gdb/" rel="nofollow" target="_blank">Gdb</a>, and showing the assembly code of the main instruction, we have this wonderful result:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-gyk3OvsWrZY/UlavtaSO-mI/AAAAAAAAA_8/Qpm2TqzbtM4/s1600/img01.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="250" src="https://2.bp.blogspot.com/-gyk3OvsWrZY/UlavtaSO-mI/AAAAAAAAA_8/Qpm2TqzbtM4/s1600/img01.png" width="400" /></a></div>
+
+Well, i am very happy when i see this:
+
+<b>0x00000000004005ef &lt;+43&gt;:<span class="Apple-tab-span" style="white-space: pre;"> </span>... &nbsp; &nbsp;# 0x600ae8 &lt;SECRETPASSWORD&gt;</b>
+.
+.
+.
+<b>0x0000000000400618 &lt;+84&gt;:</b><b><span class="Apple-tab-span" style="white-space: pre;"> </span>... &nbsp; &nbsp;</b><b># 0x600af0 &lt;STRING_CONNECTION_DATABASE&gt;</b>
+
+now i am able to simple ask to my predilect debugger to show me the values in this variables. We only need examine the memory at those two variables with the memorables names:
+
+<ul>
+<li><b>SECRETPASSWORD</b></li>
+<li><b>STRING_CONNECTION_DATABASE</b></li>
+</ul>
+
+And <i>voilà</i>:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-7G1OCf5975A/Ula0VD99SzI/AAAAAAAABAI/rXuHnsU3vZ4/s1600/img02.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="27" src="https://3.bp.blogspot.com/-7G1OCf5975A/Ula0VD99SzI/AAAAAAAABAI/rXuHnsU3vZ4/s1600/img02.png" width="400" /></a></div>
+
+And that is why i tell you, don't put your string directly into the code without any treatment!!! :)
+
+A another way very simple to view all those strings into a binary program using the program <b>strings</b> in linux distribution:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-V7Y0GaNQfso/Ula4iZL5-wI/AAAAAAAABAc/g1Ff0IE5HUo/s1600/img04.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="190" src="https://1.bp.blogspot.com/-V7Y0GaNQfso/Ula4iZL5-wI/AAAAAAAABAc/g1Ff0IE5HUo/s1600/img04.png" width="400" /></a></div>
+
+:)
+
+Thanks.</div>
