@@ -1,0 +1,198 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<span style="font-family: inherit;">Unions are very very helpful when we are developing a program for embedded systems.</span>
+<span style="font-family: inherit;">
+</span> <span style="font-family: inherit;">The declaration of a union type has that format:</span>
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[<span style="color: blue;">union</span>] [<span style="color: blue;">union_name</span>] {</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; [<span style="color: blue;">type</span>] [<span style="color: blue;">member_name_0</span>];</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; *</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; *</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; *</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; [<span style="color: blue;">type</span>] [<span style="color: blue;">member_name_n</span>];</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">} &lt;<span style="color: blue;">var_name</span>&gt;;</span>
+
+<span style="font-family: inherit;">All elements between "[ ]" are mandatory and those elements between "&lt; &gt;" aren't.</span>
+<span style="font-family: inherit;">
+</span> <span style="font-family: inherit;">The unions are important when &nbsp;we need a way to save memory. In the micro-controllers we don't have many available memory to use in our programs, so we use this type like one of many strategies to reduce a memory needs.</span>
+
+Lets see how the unions behave in the memory:
+
+In a struct type we have this situation:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>struct</b> ipv4 {</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <b>int</b> ip<b>;</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <b>char</b>&nbsp;name[255]<b>;</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">}<b>;</b></span>
+
+<table border="0" cellspacing="0" cols="3" frame="VOID" rules="NONE"><colgroup><col width="86"></col><col width="161"></col><col width="86"></col></colgroup>  <tbody>
+<tr>    <td align="LEFT" height="17" width="86">
+</td>    <td align="CENTER" width="161">Memory Stack</td>    <td align="LEFT" width="86">
+</td>   </tr>
+<tr>    <td align="LEFT" height="17">
+</td>    <td align="LEFT">
+</td>    <td align="LEFT">
+</td>   </tr>
+<tr>    <td align="RIGHT" height="17"><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: start;"><b>ip</b></span>&nbsp;-&gt;</td>    <td align="CENTER" style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-top: 1px solid #000000;"><b>0x0000000000400200</b></td>    <td align="LEFT">
+</td>   </tr>
+<tr>    <td align="RIGHT" height="17"><div style="text-align: right;">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>name</b></span> -&gt;</div>
+</td>    <td align="CENTER" style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-top: 1px solid #000000;"><b>0x0000000000400201</b></td>    <td align="LEFT">
+</td>   </tr>
+<tr>    <td align="RIGHT" height="17">
+</td>    <td align="CENTER" style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-top: 1px solid #000000;">0x0000000000400202</td>    <td align="LEFT">
+</td>   </tr>
+<tr>    <td align="LEFT" height="17">
+</td>    <td align="CENTER" style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-top: 1px solid #000000;">0x0000000000400203</td>    <td align="LEFT">
+</td>   </tr>
+<tr>    <td align="LEFT" height="17">
+</td>    <td align="CENTER" style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-top: 1px solid #000000;">0x0000000000400204</td>    <td align="LEFT">
+</td>   </tr>
+<tr>    <td align="LEFT" height="17">
+</td>    <td align="CENTER" style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-top: 1px solid #000000;">0x0000000000400205</td>    <td align="LEFT">
+</td>   </tr>
+<tr>    <td align="LEFT" height="17">
+</td>    <td align="CENTER" style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; border-top: 1px solid #000000;">0x0000000000400206</td>    <td align="LEFT">
+</td>   </tr>
+<tr>    <td align="LEFT" height="17">
+</td>    <td align="LEFT">
+</td>    <td align="LEFT">
+</td>   </tr>
+</tbody> </table>
+Now, let's try again, but this time we will use the union type:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>union</b>&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">ipv4</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;{</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp;&nbsp;<b>int</b>&nbsp;ip<b>;</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp;&nbsp;</span><b style="font-family: 'Courier New', Courier, monospace;">char</b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;name[255]</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>;</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">}<b>;</b></span>
+
+<table border="0" cellspacing="0" cols="3" frame="VOID" rules="NONE"><colgroup><col width="86"></col><col width="161"></col><col width="86"></col></colgroup><tbody>
+<tr><td align="LEFT" height="17" width="86">
+</td><td align="CENTER" width="161">Memory Stack</td><td align="LEFT" width="86">
+</td></tr>
+<tr><td align="LEFT" height="17">
+</td><td align="LEFT">
+</td><td align="LEFT">
+</td></tr>
+<tr><td align="RIGHT" height="17"><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: start;"><b>ip</b></span>-&gt;</td><td align="CENTER" style="border: 1px solid rgb(0, 0, 0);"><b>0x0000000000400200</b></td><td align="LEFT">&lt;-<b style="font-family: 'Courier New', Courier, monospace;">name</b></td></tr>
+<tr><td align="RIGHT" height="17">
+</td><td align="CENTER" style="border: 1px solid rgb(0, 0, 0);">0x0000000000400201</td><td align="LEFT">
+</td></tr>
+<tr><td align="RIGHT" height="17">
+</td><td align="CENTER" style="border: 1px solid rgb(0, 0, 0);">0x0000000000400202</td><td align="LEFT">
+</td></tr>
+<tr><td align="LEFT" height="17">
+</td><td align="CENTER" style="border: 1px solid rgb(0, 0, 0);">0x0000000000400203</td><td align="LEFT">
+</td></tr>
+<tr><td align="LEFT" height="17">
+</td><td align="CENTER" style="border: 1px solid rgb(0, 0, 0);">0x0000000000400204</td><td align="LEFT">
+</td></tr>
+<tr><td align="LEFT" height="17">
+</td><td align="CENTER" style="border: 1px solid rgb(0, 0, 0);">0x0000000000400205</td><td align="LEFT">
+</td></tr>
+<tr><td align="LEFT" height="17">
+</td><td align="CENTER" style="border: 1px solid rgb(0, 0, 0);">0x0000000000400206</td><td align="LEFT">
+</td></tr>
+<tr><td align="LEFT" height="17">
+</td></tr>
+</tbody></table>
+So, you have are asking a question? how this works? How can i get &nbsp;this two values if they are in the same memory space?
+
+Well, that is a simple question, and the answer very very simple too. You can't get both at the same time. We have a exclusive OR, or the <b>ip</b>&nbsp;field has a valid value, or the <b>name</b>&nbsp;field has the valid value. So, that is a important think about the Union type. We use this type wen we have values to be stored in different times.
+
+
+So, lets see this sample:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">#include</span></b> <b><span style="color: blue;">&lt;</span></b>stdio.h<b><span style="color: blue;">&gt;</span></b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span> <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">union</span></b> ipv4</span>
+<span style="color: blue; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>{</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><span class="Apple-tab-span" style="white-space: pre;"> </span><b><span style="color: blue;">int</span></b> ip;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><span class="Apple-tab-span" style="white-space: pre;"> </span><span style="color: blue;"><b>char</b></span> name<span style="color: blue;"><b>[</b></span>255<b><span style="color: blue;">]</span>;</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">}</span></b>host<b><span style="color: blue;">;</span></b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span> <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">int</span></b> main</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">(</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">void</span></b></span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">)</span>
+<span style="color: blue; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b style="background-color: white;">{</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span> <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.ip <span style="color: blue;"><b>=</b></span> <span style="color: red;">102030</span><b><span style="color: blue;">;</span></b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; <b><span style="color: blue;">printf</span></b>(<span style="color: #741b47;">"IP: %d\n"</span><b><span style="color: blue;">,</span></b> host.ip);</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;&nbsp;</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">printf</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">(<span style="color: #741b47;">"HOSTNAME: %s\n"</span></span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">,</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;host.name);</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span> <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">0</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;= <span style="color: orange;">'l'</span></span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">1</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;= <span style="color: orange;">'o'</span></span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">2</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;= <span style="color: orange;">'c'</span></span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">3</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;=&nbsp;</span><span style="color: orange; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">'a'</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">4</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;=&nbsp;</span><span style="color: orange; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">'l'</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">5</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;=&nbsp;</span><span style="color: orange; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">'h'</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">6</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;=&nbsp;</span><span style="color: orange; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">'o'</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">7</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;=&nbsp;</span><span style="color: orange; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">'s'</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">8</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;=&nbsp;</span><span style="color: orange; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">'t'</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; host.name</span><b style="color: blue; font-family: 'Courier New', Courier, monospace;">[</b><span style="color: red; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">9</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">]</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;=&nbsp;</span><span style="color: orange; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">'\0'</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">;</span></b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span> <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;&nbsp;<b><span style="color: blue;">printf</span></b>(<span style="color: #741b47;">"IP: %d\n"</span><b><span style="color: blue;">,</span></b>&nbsp;host.ip)<b><span style="color: blue;">;</span></b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;&nbsp;</span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">printf</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">(<span style="color: #741b47;">"HOSTNAME: %s\n"</span></span><b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">,</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;host.name)<b><span style="color: blue;">;</span></b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; <b><span style="color: blue;">return</span></b> 0<b><span style="color: blue;">;</span></b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span> <b style="font-family: 'Courier New', Courier, monospace;"><span style="color: blue;">}</span></b>
+
+when we build this sample and execute the program we have the result:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">$ ./<span style="color: #38761d;">a.out</span>&nbsp;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">IP: 102030</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">HOSTNAME: <span style="color: red;">[Not recognized char]</span></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">IP: 1633906540</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">HOSTNAME: localhost</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">$|&nbsp;</span>
+<div>
+
+<span style="font-family: inherit;">Well, let's make more interesting. Come see the assembly of this program:</span>
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; push &nbsp; rbp</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;rbp</b>,<b>rsp</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>line 1&gt; mov &nbsp; &nbsp;DWORD</b> <b>PTR</b> [rip+0x20048e],0x18e8e &nbsp; &nbsp;# 0x600960</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;edx</b>,<b>DWORD</b> <b>PTR</b> [rip+0x200488] &nbsp; &nbsp; &nbsp; &nbsp;# 0x600960</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;eax</b>,0x400688</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;esi</b>,<b>edx</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;rdi</b>,<b>rax</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;eax</b>,0x0</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; call &nbsp; </b>0x4003b8 &lt;<b>printf@plt</b>&gt;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;eax</b>,0x400690</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;esi</b>,0x600960</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;rdi</b>,<b>rax</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;eax</b>,0x0</span>
+<b style="font-family: 'Courier New', Courier, monospace;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>call &nbsp; </b>0x4003b8 &lt;<b>printf@plt</b>&gt;</span>
+<b style="font-family: 'Courier New', Courier, monospace;">line 2&gt;</b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp;mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x200456],0x6c &nbsp; &nbsp; &nbsp; &nbsp;# 0x600960</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x200450],0x6f &nbsp; &nbsp; &nbsp; &nbsp;# 0x600961</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x20044a],0x63 &nbsp; &nbsp; &nbsp; &nbsp;# 0x600962</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x200444],0x61 &nbsp; &nbsp; &nbsp; &nbsp;# 0x600963</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x20043e],0x6c &nbsp; &nbsp; &nbsp; &nbsp;# 0x600964</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x200438],0x68 &nbsp; &nbsp; &nbsp; &nbsp;# 0x600965</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x200432],0x6f &nbsp; &nbsp; &nbsp; &nbsp;# 0x600966</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x20042c],0x73 &nbsp; &nbsp; &nbsp; &nbsp;# 0x600967</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x200426],0x74 &nbsp; &nbsp; &nbsp; &nbsp;# 0x600968</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;BYTE PTR</b> [<b>rip</b>+0x200420],0x0 &nbsp; &nbsp; &nbsp; &nbsp; # 0x600969</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;edx</b>,<b>DWORD</b> <b>PTR</b> [rip+0x200411] &nbsp; &nbsp; &nbsp; &nbsp;# 0x600960</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;eax</b>,0x400688</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;esi</b>,<b>edx</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;rdi</b>,<b>rax</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;eax</b>,0x0</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; call &nbsp; </b>0x4003b8 &lt;<b>printf@plt</b>&gt;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;eax</b>,0x400690</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;esi</b>,0x600960</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;rdi</b>,<b>rax</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;eax</b>,0x0</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; call &nbsp; </b>0x4003b8 &lt;<b>printf@plt</b>&gt;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; &nbsp;eax</b>,<b>0x0</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; leave &nbsp;</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>&nbsp; &nbsp; &nbsp; &nbsp; ret&nbsp;</b></span>
+
+<span style="font-family: inherit;">First, in line 1 we can see the value&nbsp;<b>0x18e8e</b>&nbsp;being put in the address [<b>rip+0x20048 =&nbsp;</b><b>0x600960</b>]. Keep the address&nbsp;<b>0x600960</b> in your mind please.</span>
+<span style="font-family: inherit;">If you calculate the decimal form of the value <b>0x18e8e</b>, you get <b>102030</b>, this value will be&nbsp;printed in the string "<b>IP: 102030</b>".</span>
+<span style="font-family: inherit;">
+</span> <span style="font-family: inherit;">So, at this moment we found the adress for&nbsp;<b>host.ip</b>-&gt;&nbsp;<b>0x600960</b>.</span>
+<span style="font-family: inherit;">
+</span> <span style="font-family: inherit;">Now,in the line 2 we can see&nbsp;clearly&nbsp;the value&nbsp;<b>0x6c</b> (this is the char <b>l</b> in&nbsp;<b>ASCII</b>) being put into the address [<b>rip</b><b>+0x200456 = 0x600960</b>] (do you remember in line 1 when we found the address for&nbsp;<b>host.ip</b>?) well, here is when the program sets the value localhost into the variable&nbsp;host.name. That is amazing!!! The address for both variables in the Union type are&nbsp;<b>0x600960</b>.</span>
+<span style="font-family: inherit;"></span></div>
+<span style="font-family: inherit;">
+</span> <span style="font-family: inherit;">Well, i hope thats are a valuable information for you.</span>
+<span style="font-family: inherit;">
+</span> <span style="font-family: inherit;">Thanks.</span></div>
