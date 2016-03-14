@@ -1,0 +1,178 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-9KghMoVzP-I/Um-bBmdyhAI/AAAAAAAABEM/uNIVcmLlzbg/s1600/img00.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="https://2.bp.blogspot.com/-9KghMoVzP-I/Um-bBmdyhAI/AAAAAAAABEM/uNIVcmLlzbg/s1600/img00.png" width="266" /></a></div>
+
+The Adroid platform has many features for increase the security in the device. Those features can really provide more power to protect ours information, but the Android is open source, that meaning all strategy used can be validated by all those wants know how they work.
+
+At this moment we will verify the Pattern Lock Screen security feature. The feature protect your device with a draw pattern on the screen, but, this pattern has some limitations that lead us how we can break this security item.
+
+Let's explain three those limitations:
+
+a) First of all, the discussion universe is very limited, we have only nine dots in the screen. This limitation has a important contribution for break the pattern, because when we use a brute-force strategy, we will have less possibilities to test;
+
+b) We can not pass a dot more the once. This limitation increase the item (a), because we have a set of nine items and they can not duplicated, we have a combinatorial analysis problem to solve;
+
+c) The minimum of dots used in the patter can not be less than four;
+
+How we can see, that's all about math.
+
+In this combinatorial problem we have the situation:
+
+Nine distinct elements.
+They can be arranged in one of theses possibilities:
+
+4x4 ; 5x5 ; 6x6 ; 7x7 ; 8x8 ; 9x9
+
+So, let's make some considerations:
+
+Do you remember the initial figure? We can see those dots with a Cartesian plain:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-_AqagACbZsw/Um-bY9uBrzI/AAAAAAAABEU/XcQX_GFAark/s1600/img00_2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="https://3.bp.blogspot.com/-_AqagACbZsw/Um-bY9uBrzI/AAAAAAAABEU/XcQX_GFAark/s1600/img00_2.png" width="266" /></a></div>
+
+So, we have know nine dot in the plain. This is important because in the Android's source code, that is exactly the same way how they are treated. For simplification, we can set a number representing each one of those dots:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-9RUmvRTdgfU/Um-jJpbm0JI/AAAAAAAABFc/AElByVwFNNA/s1600/img00_3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="https://3.bp.blogspot.com/-9RUmvRTdgfU/Um-jJpbm0JI/AAAAAAAABFc/AElByVwFNNA/s1600/img00_3.png" width="266" /></a></div>
+
+
+If you get the Android source code on the GitHub, you can navigate into the package&nbsp;com/android/internal/widget:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-suU8-SIyF4I/Um-dVJX9tMI/AAAAAAAABEg/w26O0ryMLd0/s1600/img01.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="85" src="https://1.bp.blogspot.com/-suU8-SIyF4I/Um-dVJX9tMI/AAAAAAAABEg/w26O0ryMLd0/s1600/img01.png" width="400" /></a></div>
+<div style="text-align: center;">
+<a href="https://github.com/android/platform_frameworks_base/tree/dbc51de44fe4f9a7f81528204250de32ec405d39/core/java/com/android/internal/widget" rel="nofollow" target="_blank"><span style="font-size: x-small;">GitHub - Android Source Code</span></a></div>
+
+you will see two important classes:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-PoRuj1mM2NU/Um-d35YkV2I/AAAAAAAABEo/UHg-pcw_AbA/s1600/img01_2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="30" src="https://2.bp.blogspot.com/-PoRuj1mM2NU/Um-d35YkV2I/AAAAAAAABEo/UHg-pcw_AbA/s1600/img01_2.png" width="400" /></a></div>
+Well, let's see those two classes more close:
+
+On the file <b>LockPatternUtils.java</b> in line 797, we have the important method&nbsp;<b>patternToHash</b>, this method receive a list of&nbsp;<b>LockPatternView.Cell</b> objects and returns <b>byte array</b> to be persisted in your device.
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-oo7e1LFnmN8/Um-fdwuCtqI/AAAAAAAABE0/Fy2uTIlzgy4/s1600/img02.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="280" src="https://2.bp.blogspot.com/-oo7e1LFnmN8/Um-fdwuCtqI/AAAAAAAABE0/Fy2uTIlzgy4/s1600/img02.png" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Well, only we can do is use this method to create a rain table with all possible hashes SHA-1. This rain table will be used in a attack brute-force.</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Let's see how&nbsp;<b>LockPatternView.Cell&nbsp;</b>looks like:</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-NA24zZHWffU/Um-gTnYYgNI/AAAAAAAABE8/7T5TArxaaEk/s1600/img03.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="https://1.bp.blogspot.com/-NA24zZHWffU/Um-gTnYYgNI/AAAAAAAABE8/7T5TArxaaEk/s1600/img03.png" width="305" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+the code of this class <b>Cell</b>&nbsp;end in line&nbsp;187. We will need this class too.</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+So, all we can do is create a class Cell with the same structure, and use a little creativity to generate a rain table with all possible values.</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+The algorithm to create a rain table with combination 9 elements, 4x4 is:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-uauhxpeDuLU/Um-hmba4Z8I/AAAAAAAABFI/jKKFVnjw23A/s1600/img04.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="191" src="https://2.bp.blogspot.com/-uauhxpeDuLU/Um-hmba4Z8I/AAAAAAAABFI/jKKFVnjw23A/s1600/img04.png" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+&nbsp; Well, not so beautiful, but they do what i want ;-). With the same algorithm and a little modification we can have the method for 5-6-7-8-9 rain table. The file resulted in this process looks like:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-pnxiaOD7Gh8/Um-iQjGE9hI/AAAAAAAABFQ/EA63AwFQtE8/s1600/img05.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="167" src="https://2.bp.blogspot.com/-pnxiaOD7Gh8/Um-iQjGE9hI/AAAAAAAABFQ/EA63AwFQtE8/s1600/img05.png" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+All we can do is get the patters when it is saved on device. But how can we do this? Its very simple: "Use the force Luke, and the force will be with you, allways.", read the source code!!!</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+In the class&nbsp;<b>LockSettingsService.java</b>, we can see clearly:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-bNBFTMqaOzA/Um-lOCuXhZI/AAAAAAAABFo/BDTgyvV8BRk/s1600/img06.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="225" src="https://2.bp.blogspot.com/-bNBFTMqaOzA/Um-lOCuXhZI/AAAAAAAABFo/BDTgyvV8BRk/s1600/img06.png" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+In line 73 we found the name of the file. And in the same file, we can found how the system use this information:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-89NrHgAbkmc/Um-lwL4pXRI/AAAAAAAABFw/VoTSWlhSFhY/s1600/img07.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="111" src="https://2.bp.blogspot.com/-89NrHgAbkmc/Um-lwL4pXRI/AAAAAAAABFw/VoTSWlhSFhY/s1600/img07.png" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+So, at this moment we have a way to attack with brute-force a patter protection.</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+So let's see a sample:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Remember the pattern in the first image in this article. This pattern create a file gesture.key with this content:</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-mJGCujYwNlw/Um-miAEqkeI/AAAAAAAABF4/M3Fp9GA_Vsw/s1600/img08.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="43" src="https://3.bp.blogspot.com/-mJGCujYwNlw/Um-miAEqkeI/AAAAAAAABF4/M3Fp9GA_Vsw/s1600/img08.png" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<span style="font-size: x-small;">View with vi on Linux</span></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+All we can do is get any hex editor and visualize this content, i do prefer the hex editor <a href="http://www.dettus.net/dhex/" rel="nofollow" target="_blank">dhex</a>&nbsp;but you are free to use whatever you want.</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-_8ArZri080E/Um-nZoc8R5I/AAAAAAAABGA/5h_17xUXOZg/s1600/img09.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="42" src="https://4.bp.blogspot.com/-_8ArZri080E/Um-nZoc8R5I/AAAAAAAABGA/5h_17xUXOZg/s1600/img09.png" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+If you make you rain table with the algorithm explained here you have now six files, each one with all possibilities of a combination pattern. Use the value get in dhex:&nbsp;<b>810B89341057265D720605CF83A00FFF7981E116</b></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+All we have to do now is use some way to find this content into the rain table. I am currently using the following script:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; font-size: x-small;"><b>$&nbsp;cat *.tb | grep "$(xxd -l 16 -u -g 16 gesture.key | cut -d \ &nbsp;-f2)"</b></span></div>
+<div class="separator" style="clear: both; text-align: left;">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; font-size: x-small;"><b>[1][5][9][6][3][2][8][7][4] = [810B89341057265D720605CF83A00FFF7981E116]</b></span></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+How you can imagine,&nbsp;<b style="font-family: 'Courier New', Courier, monospace; font-size: small;">[1][5][9][6][3][2][8][7][4]</b>&nbsp;represents the sequence to be performed in the pattern to access the phone.</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-zpWKXTGoSOw/Um-pyCtcadI/AAAAAAAABGM/vAbZEnIKT40/s1600/img00_4.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="400" src="https://1.bp.blogspot.com/-zpWKXTGoSOw/Um-pyCtcadI/AAAAAAAABGM/vAbZEnIKT40/s1600/img00_4.png" width="266" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+That's all. Tanks.</div>
+</div>
