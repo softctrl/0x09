@@ -1,0 +1,50 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Hi.
+
+in a course of a basic physics, we can learn to calculate a equivalent resistance of the association of resistors. But, we cant see how this can be proved in the real life.
+
+To this proof of concept we will use two resistors, one of 330Ω and other of 1000Ω or 1kΩ, both &nbsp;with 5% of variation.
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-y1tV9rV3VGY/Uo8xME5dJlI/AAAAAAAABKA/_ug4y85nnVc/s1600/resistors.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="175" src="https://3.bp.blogspot.com/-y1tV9rV3VGY/Uo8xME5dJlI/AAAAAAAABKA/_ug4y85nnVc/s1600/resistors.png" width="400" /></a></div>
+
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+
+First, we will connect this two resistors in serie and we will verify the final value using a simple multimeter:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-T15kThgWSy4/Uo8xMGacBDI/AAAAAAAABKQ/bgoDG2XRJwM/s1600/resistors-in-serie.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="291" src="https://2.bp.blogspot.com/-T15kThgWSy4/Uo8xMGacBDI/AAAAAAAABKQ/bgoDG2XRJwM/s1600/resistors-in-serie.png" width="400" /></a></div>
+
+
+How you can see, when we put the resistor in serie, the equivalent resistance will be the sum of all those single values of each resistor:
+
+<b style="font-family: 'Courier New', Courier, monospace;">Req = R1 + R2 + ... + Rn</b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>Req = 330Ω + 1000Ω = 1330Ω</b></span>
+
+Now, we will link those resistors in parallel mode, 
+
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-G8jLq-SjhZw/Uo8yq5-PJzI/AAAAAAAABKY/nIwd-mqULw0/s1600/resistors-in-parallel.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="265" src="https://1.bp.blogspot.com/-G8jLq-SjhZw/Uo8yq5-PJzI/AAAAAAAABKY/nIwd-mqULw0/s1600/resistors-in-parallel.png" width="400" /></a></div>
+
+<b style="font-family: 'Courier New', Courier, monospace;">
+</b> In this case the equation is a little more complex, or not :)
+
+<b style="font-family: 'Courier New', Courier, monospace;">1/Req = 1/R1 + 1/R2 + ... + 1/Rn</b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>1/Req = 1/330Ω + 1/1000Ω =&nbsp;</b></span><b style="font-family: 'Courier New', Courier, monospace;">(</b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>330Ω + 1000</b></span><b style="font-family: 'Courier New', Courier, monospace;">Ω</b><b style="font-family: 'Courier New', Courier, monospace;">) /&nbsp;</b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>(330Ω . 1000</b></span><b style="font-family: 'Courier New', Courier, monospace;">Ω)</b>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">Then:</span>
+<b style="font-family: 'Courier New', Courier, monospace;">Req =&nbsp;</b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>(330Ω . 1000</b></span><b style="font-family: 'Courier New', Courier, monospace;">Ω) /&nbsp;</b><b style="font-family: 'Courier New', Courier, monospace;">(</b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>330Ω + 1000</b></span><b style="font-family: 'Courier New', Courier, monospace;">Ω</b><b style="font-family: 'Courier New', Courier, monospace;">) = 248.120300752</b><b style="font-family: 'Courier New', Courier, monospace;">Ω</b><b style="font-family: 'Courier New', Courier, monospace;">&nbsp;= 248</b><b style="font-family: 'Courier New', Courier, monospace;">Ω</b>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>
+</b></span></div>
+Also, this particular case we can simply do this:
+
+<b style="font-family: 'Courier New', Courier, monospace;">Req =&nbsp;</b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>(R1Ω . R2</b></span><b style="font-family: 'Courier New', Courier, monospace;">Ω) /&nbsp;</b><b style="font-family: 'Courier New', Courier, monospace;">(</b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>R1Ω + R2</b></span><b style="font-family: 'Courier New', Courier, monospace;">Ω</b><b style="font-family: 'Courier New', Courier, monospace;">)</b>
+
+A very usefull rule is, when we connect many resistors in serie, the value of the equivalent resistance allways will be less then the value of the resistor with less value. In your sample, the less valuable resistor is the resistor with 330Ω, and the equivalent resistance when connection is in parallel was the value 248Ω &lt; 330Ω. I use this rule to validate my result in circuits more complex.
+<div>
+
+</div>
+Thanks.</div>
