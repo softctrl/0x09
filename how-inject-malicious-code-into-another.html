@@ -1,0 +1,190 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Hi.
+
+At this moment i will show you how we can explore the vulnerability of Dynamic Loader on Linux.
+
+Dynamically linked libraries are very important to a operational system, and on Linux that is very important too. They allow many others programs to dynamically access external functionality. But, like uncle Ben says "with great power there must also come great responsibility". When we use dynamically linked libraries we can know that they can be overridden on run-time.
+
+Basically, in Linux we have two ways to use a shared code on ours projects:
+<div style="text-align: center;">
+<a href="http://2.bp.blogspot.com/-oneqaS9hIXw/UqDXyezjeBI/AAAAAAAABRA/TpKWbgEqr_I/s1600/img00.png" imageanchor="1"><img border="0" src="https://2.bp.blogspot.com/-oneqaS9hIXw/UqDXyezjeBI/AAAAAAAABRA/TpKWbgEqr_I/s320/img00.png" /></a></div>
+<div style="text-align: left;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+Over the years we learn that do dynamic loading is more efficiently because they let us to make a good management of the space in ours programs and in ours servers.</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+For this article we will see only the Dynamic load strategy. This method allow us inject malicious code in a target application. But, there is not only for this propose that this knowledge can be used. I use this method to performs reverse engineer, when i need analyze the behavior of one application that i don't have the source code.</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+Let see this sample:</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="text-align: left;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+On this application we have a method to print a menu with 3 options, and they wait a interaction from the user and finally returns the selected option.</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-tMsc3sW15VY/UqDYCdXMkYI/AAAAAAAABRI/KhQUI-e8mYo/s1600/img01.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://3.bp.blogspot.com/-tMsc3sW15VY/UqDYCdXMkYI/AAAAAAAABRI/KhQUI-e8mYo/s1600/img01.png" width="400" /></a></div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+&nbsp;In the next method, we will validate a username and password informed by the user.</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-hhZ9AqjDC34/UqDYICP3yFI/AAAAAAAABRQ/1uIeG9_yVFk/s1600/img02.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="161" src="https://2.bp.blogspot.com/-hhZ9AqjDC34/UqDYICP3yFI/AAAAAAAABRQ/1uIeG9_yVFk/s1600/img02.png" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+And finally the main method:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-vWq7_OQ7SyI/UqDYTZWNjJI/AAAAAAAABRY/6CfKMgYj1pM/s1600/img03.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://2.bp.blogspot.com/-vWq7_OQ7SyI/UqDYTZWNjJI/AAAAAAAABRY/6CfKMgYj1pM/s1600/img03.png" width="500" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+&nbsp;In the next picture we can see this application be executed:</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-REIENFho5RA/UqDYbNkGIiI/AAAAAAAABRg/Y3BlxQNI4pc/s1600/img04.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="https://4.bp.blogspot.com/-REIENFho5RA/UqDYbNkGIiI/AAAAAAAABRg/Y3BlxQNI4pc/s1600/img04.png" width="484" /></a></div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+Here we show you a simple steps to use this application.</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+When we start the application, this show a console menu, and wait a interation with the user, if the user select option between 1 and 3 the application will start a user validation, if choose 0 the application will be finished.</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+&nbsp;Well, assume we have made a avaliation on this program, and we <a href="http://0x09.blogspot.com.br/2013/10/why-should-not-put-static-strings.html" rel="nofollow" target="_blank">find evidence that of the comparision between two strings are made to avaliate the permissions</a>.</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-6wnRzjMZUec/UqDYlSi70xI/AAAAAAAABRo/QDSu3uycDm8/s1600/img05.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="396" src="https://4.bp.blogspot.com/-6wnRzjMZUec/UqDYlSi70xI/AAAAAAAABRo/QDSu3uycDm8/s1600/img05.png" width="400" /></a></div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+How you can see, in the address <b>0x0000000000400717</b> we have made a call to &lt;<b>strncmp@plt</b>&gt; :) That’s all we need for now.</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+So, if you look at the string header and search for “<b>strncmp</b>” signature you'll see this:</div>
+<div style="text-align: left;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-TlRM1fwXu1w/UqDYrW_aLdI/AAAAAAAABRw/-7rAoxigSDk/s1600/img06.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="70" src="https://1.bp.blogspot.com/-TlRM1fwXu1w/UqDYrW_aLdI/AAAAAAAABRw/-7rAoxigSDk/s1600/img06.png" width="400" /></a></div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+With this information, all do we have to do, is create a library with this method, with the same signature, but with some more ingredients :D</div>
+<div style="text-align: left;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-D2SNr3nBpq8/UqDYxy-4kuI/AAAAAAAABR4/kjvl6ZIyXqo/s1600/img07.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="330" src="https://2.bp.blogspot.com/-D2SNr3nBpq8/UqDYxy-4kuI/AAAAAAAABR4/kjvl6ZIyXqo/s1600/img07.png" width="400" /></a></div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+To compile this library we need use this command:</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+<span style="font-family: &quot;courier new&quot;;"><b>$ cc -fPIC -shared -o sec_crack.so  sec_crack.c</b></span></div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+Now, we only need inject into the LD_PRELOAD variable and start the application target:</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+<span style="font-family: &quot;courier new&quot;;"><b>$ LD_PRELOAD=./sec_crack.so ./sec</b></span></div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+And finally we will compromise the password protection on the program:</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-BRrEb4fAdpM/UqDY7DWgEuI/AAAAAAAABSA/T0Y8V-Wk3-w/s1600/img08.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="https://1.bp.blogspot.com/-BRrEb4fAdpM/UqDY7DWgEuI/AAAAAAAABSA/T0Y8V-Wk3-w/s1600/img08.png" /></a></div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+Well, after we user our “not so secret” password crack we can get full access to the target program.</div>
+<div style="line-height: 115%; margin-bottom: 0in; page-break-after: auto; page-break-before: auto;">
+
+</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+</div>
+<div style="line-height: 115%; margin-bottom: 0in;">
+Thanks.</div>
+<div style="text-align: left;">
+
+</div>
+<div style="text-align: left;">
+
+</div>
+<div style="text-align: left;">
+
+</div>
+<div style="text-align: left;">
+
+</div>
+</div>
