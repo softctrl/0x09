@@ -1,0 +1,435 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div>
+
+</div>
+<span style="font-size: x-large;"><a href="http://en.wikipedia.org/wiki/Objective-C" rel="nofollow" target="_blank">Objective-C</a></span>
+
+Segundo a Wikipedia, Objective-C é uma linguagem de programação orientada a objetos e de propósito geral que adiciona o estilo de mensagem da Smalltalk para a linguagem C de Dennis Ritchie. A linguagem Objective-C é a principal linguagem utilizada pela Apple nos sistemas operacionais &nbsp;OS X e iOS bem como nas suas API's de programação. Esta linguagem foi desenvolvida por volta de 1980, e foi selecionada para ser a principal linguagem da NeXT de Steve Jobs, sendo utilizada no sistema operacional NeXTSTEP do qual os sistemas OS X e iOS derivaram.
+
+Infelizmente a Apple fecha suas ferramentas de programação de modo que sem um Macbook, se torna praticamente impossível desenvolver para a plataforma da Apple. Mas felizmente, nossa comunidade é bastante ativa, e também não vamos crucificar a Apple, pois a mesma também possui uma (pequena) porção <a href="http://www.opensource.apple.com/" rel="nofollow" target="_blank">open source</a>.
+
+Um fato &nbsp;importante é que apesar de o <a href="http://www.gnustep.org/" rel="nofollow" target="_blank">GNUstep</a>&nbsp;antigo OpenStep, ser anterior ao Cocoa, o Cocoa foi baseado no OpenStep.
+
+Perceba na imagem abaixo que o <a href="http://www.gnustep.org/" rel="nofollow" target="_blank">GNUstep</a> se enquadra no grupo de kits para criação de interface gráfica de usuários.
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Free_and_open-source-software_display_servers_and_UI_toolkits.svg/800px-Free_and_open-source-software_display_servers_and_UI_toolkits.svg.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Free_and_open-source-software_display_servers_and_UI_toolkits.svg/800px-Free_and_open-source-software_display_servers_and_UI_toolkits.svg.png" height="150" width="400" /></a></div>
+<div style="text-align: center;">
+<span style="font-size: x-small;">Fonte: Wikipedia</span></div>
+
+<span style="font-size: x-large;"><a href="http://www.gnustep.org/" rel="nofollow" target="_blank">GNUstep</a></span>
+
+Também segundo a Wikipedia, <a href="http://www.gnustep.org/" rel="nofollow" target="_blank">GNUstep</a> é uma implementação gratuita das bibliotecas Objective-C Cocoa, componentes visuais, e ferramentas de desenvolvimento para Unix-like e Windows, sendo parte integrante do projeto GNU. Foi desenvolvido pelo programador <a href="http://en.wikipedia.org/wiki/Paul_Kunz" rel="nofollow" target="_blank">Paul Kunz</a>&nbsp;que atuava no <a href="http://en.wikipedia.org/wiki/SLAC_National_Accelerator_Laboratory" rel="nofollow" target="_blank">Centro de Aceleração Linear de Stanford</a>. Na época ele recebeu a responsabilidade de portar uma aplicação <a href="http://en.wikipedia.org/wiki/HippoDraw" rel="nofollow" target="_blank">Hipodraw</a> que era desenvolvido para a plataforma NeXTSTEP, o curioso é que ao invés de rescrever a aplicação para outras plataformas ele decidiu portar toda a camada de objetos do NeXTSTEP do qual o <a href="http://en.wikipedia.org/wiki/HippoDraw" rel="nofollow" target="_blank">Hipodraw</a> dependia. Foi um sucesso, o projeto pode ser recompilado sem precisar mudar uma linha de seu código. A primeira liberação aberta do projeto, até então chamado de OpenStep se deu em 1994.
+
+Neste post irei mostrar como instalar o pacote&nbsp;<a href="http://www.gnustep.org/" rel="nofollow" target="_blank">GNUStep</a>. Este pacote implementa o Core Foundation de bibliotecas do Objective-C sendo que quase 90% dos códigos implementados em um Macbook também poderão ser recompilados no Centos com pouca ou quase nenhuma alteração.
+
+Como primeiro passo monte uma distribuição básica <a href="https://www.centos.org/" rel="nofollow" target="_blank">Centos</a>, eu sempre uso o cd de instalação mínimo, e vou incluindo os pacotes que preciso ao longo da utilização do pc. Mais neste posto estou assumindo que todos sabemos como instalar e configurar o Linux Centos.
+
+Após instalado o <a href="https://www.centos.org/" rel="nofollow" target="_blank">Centos</a>&nbsp;daremos início a instalação dos pacotes necessários para compilação do GNUStep.
+
+Para organizar a instalação eu costumo criar uma diretório <b>gnustep</b> onde deixo salvo os pacotes que eu fiz download quando fui instalar o <a href="http://www.gnustep.org/" rel="nofollow" target="_blank">GNUstep</a>.
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>~#mkdir gnustep</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>~#cd gnustep</b></span>
+
+Agora que estamos no diretório do nosso pequeno projeto, podemos iniciar a configuração do Centos para poder instalar o <a href="http://www.gnustep.org/" rel="nofollow" target="_blank">GNUstep</a>.
+
+1) Atualizar os pacotes do Centos. Isso não é totalmente obrigatório mais como acabamos de instalar o Centos, eu assumo que sempre é bom atualizar os pacotes para as suas versões atuais estáveis:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>[gnustep]#yum -y upgrade</b></span>
+<div class="separator" style="clear: both; text-align: center;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-CNBrhTr4gfo/UsaifrjJXFI/AAAAAAAABXQ/J63F83UOEGc/s1600/001.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="220" src="https://3.bp.blogspot.com/-CNBrhTr4gfo/UsaifrjJXFI/AAAAAAAABXQ/J63F83UOEGc/s1600/001.png" width="400" /></a></div>
+
+
+2) Caso você tenha instalado o Centos Minimal, você não possui as ferramentas de desenvolvimento, make, gcc e outros, mais isso é simples de resolver:
+
+<b style="font-family: 'Courier New', Courier, monospace;">[gnustep]</b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">#yum -y groupinstall "Development Tools"</span></b>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-ZO-KP0QEi-U/UsavUsaIbcI/AAAAAAAABXg/4luY9p_KnG4/s1600/002.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://3.bp.blogspot.com/-ZO-KP0QEi-U/UsavUsaIbcI/AAAAAAAABXg/4luY9p_KnG4/s1600/002.png" width="400" /></a></div>
+
+
+3) Agora sim, vamos instalar pacotes obrigatórios para dar prosseguimento a instalação do GNUstep:
+
+<b style="font-family: 'Courier New', Courier, monospace;">[gnustep]</b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">#yum -y install wget ncurses* openssl* libXt* glib* libjpeg* libpng* libxml* libxslt* libtiff* libXext* gnutls* gcc-objc* libobjc* libffi*</span></b>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-Xvf6rSQqFoY/UsaxY5B3iJI/AAAAAAAABXs/UpFj5132Z40/s1600/003.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://2.bp.blogspot.com/-Xvf6rSQqFoY/UsaxY5B3iJI/AAAAAAAABXs/UpFj5132Z40/s1600/003.png" width="400" /></a></div>
+
+
+Fora a biblioteca de desenvolvimento <a href="http://www.gnu.org/software/ncurses/" rel="nofollow" target="_blank">ncurses</a>, todo o restante é obrigatório para a instalação do <a href="http://www.gnustep.org/" rel="nofollow" target="_blank">GNUstep</a>. Outro ponto importante é sobre a lib <a href="https://sourceware.org/libffi/" rel="nofollow" target="_blank">FFI</a> que apesar de estar inclusa no comando acima, a mesa esta com versão desatualizada nos repositórios do Centos, precisamos de no mínimo da versão 3.0.9, então mais a frente iremos baixar os fontes e instalar corretamente esta dependência.
+
+<u><b>Agora vamos instalar via fontes mais dois pacotes necessários para instalação do GNUstep.</b></u>
+
+Neste momento vamos resolver o problema de instalação da biblioteca FFI no Centos:
+
+4) Primeiro baixe os fontes da <b><a href="https://sourceware.org/libffi/" rel="nofollow" target="_blank">libffi</a></b> diretamente do endereço <a href="https://sourceware.org/libffi/">https://sourceware.org/libffi/</a>
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>[gnustep]#wget -c "ftp://sourceware.org/pub/libffi/libffi-3.0.13.tar.gz"</b></span>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-3X6ZKpXtkKI/Usa0h_2yMGI/AAAAAAAABX4/MwyRrADzBm8/s1600/004.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="220" src="https://2.bp.blogspot.com/-3X6ZKpXtkKI/Usa0h_2yMGI/AAAAAAAABX4/MwyRrADzBm8/s1600/004.png" width="400" /></a></div>
+
+Descompacte o arquivo utilizando o tar:
+
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#tar -zxvf libffi-3.0.13.tar.gz</span></b>
+
+Agora vamos para a instalação. De dentro do diretório descompactado inicie o processo de compilação normal (configure/ make/ make install), tendo atenção de informa o parâmetro --prefix no configure:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>[</b></span><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">libffi-3.0.13</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>]#./configure --prefix=/usr/include</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>[</b></span><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">libffi-3.0.13</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>]#make</b></span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>[</b></span><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">libffi-3.0.13</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>]#make install</b></span>
+
+Agora neste ponto vamos fazer uma "gambiarra" para que tudo funcione corretamente:
+
+
+<div class="p1">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>[gnustep]#cp -Rvf /usr/include/lib64/libffi* /usr/lib64/</b></span></div>
+<div class="p1">
+
+</div>
+<div class="p1">
+Isso foi necessário pois o processo <b>make install</b> copiou as lib`s para o diretório <b>/usr/include/lib64/</b> e nós precisamos deles na <b>/usr/lib64/</b>.</div>
+<div class="p1">
+
+</div>
+<div class="p1">
+Após este processo sinta-se a vontade para excluir o diretório&nbsp;<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>libffi-3.0.13/</b>.</span></div>
+
+<b>5) Neste ponto vamos instalar o <a href="http://site.icu-project.org/" rel="nofollow" target="_blank">ICU-International Components for Unicode</a>. O mesmo pode ser instalado via yum, porém prefiro instalar via código fonte:</b>
+
+
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#wget -c "http://download.icu-project.org/files/icu4c/52rc/icu4c-52_rc2-src.tgz"</span></b></div>
+<div class="p1">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-suEB0JlAxPw/Usa4KvMigRI/AAAAAAAABYE/AHPMtwR1oS0/s1600/005.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://1.bp.blogspot.com/-suEB0JlAxPw/Usa4KvMigRI/AAAAAAAABYE/AHPMtwR1oS0/s1600/005.png" width="400" /></a></div>
+<div class="p1">
+
+</div>
+<div class="p1">
+Em seguida descompacte o arquivo:</div>
+<div class="p1">
+
+</div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#tar -zxvf icu4c-52_rc2-src.tgz</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b></div>
+<div class="p1">
+<span style="font-family: inherit;">Agora entre no diretório <b>icu/source&nbsp;</b>e proceda com os comandos para configuração e instalação do projeto:</span></div>
+<div class="p1">
+<span style="font-family: inherit;">
+</span></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[source]#./configure</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[source]#gmake</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[source]#gmake install</span></b></div>
+<div class="p1">
+
+</div>
+<div class="p1">
+Este processo poderá demorar um pouco, então eu sugiro irmos tomar um café! :)</div>
+<div class="p1">
+
+</div>
+<div class="p1">
+Terminado o processo de compilação e instalação do pacote ICU, faremos mais um ajuste igual ao que fizemos para a libffi.</div>
+<div class="p1">
+
+</div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[source]#cp -Rvf /usr/local/lib/libicu* /usr/lib64/</span></b></div>
+<div class="p1">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-ndLXPoPRWyw/Usa545dQAYI/AAAAAAAABYQ/JRTz2XzipVs/s1600/006.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://3.bp.blogspot.com/-ndLXPoPRWyw/Usa545dQAYI/AAAAAAAABYQ/JRTz2XzipVs/s1600/006.png" width="400" /></a></div>
+<div class="p1">
+
+</div>
+<div class="p1">
+Após este processo sinta-se a vontade para excluir o diretório&nbsp;<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>icu/</b>.</span></div>
+<div class="p1">
+
+</div>
+<div class="p1">
+<b><u>Pronto agora podemos baixar os pacotes do GNUStep, compilar, instalar e somente então começar a desenvolver em Objective-C no Linux.</u></b></div>
+<div class="p1">
+
+
+6) Vamos instalar o primeiro pacote do GNUstep, o pacote Startup
+
+
+<div class="p1">
+<b>[gnustep]#wget -c "ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-startup-0.32.0.tar.gz"</b></div>
+<div class="p1">
+<b>
+</b></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-64tfYVvwzwA/Usa7Gq4TsVI/AAAAAAAABYY/PqRNJ2mTQ7w/s1600/007.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://4.bp.blogspot.com/-64tfYVvwzwA/Usa7Gq4TsVI/AAAAAAAABYY/PqRNJ2mTQ7w/s1600/007.png" width="400" /></a></div>
+<div class="p1">
+<b>
+</b></div>
+<div class="p1">
+Descompacte o arquivo:</div>
+<div class="p1">
+
+</div>
+<div class="p1">
+<b>[gnustep]#tar -zxvf gnustep-startup-0.32.0.tar.gz</b></div>
+<div class="p1">
+<b>
+</b></div>
+<div class="p1">
+De dentro do diretório descompactado, execute o script <b>InstallGNUstep</b>:</div>
+<div class="p1">
+<b>
+</b></div>
+<div class="p1">
+<b>[</b><b>gnustep-startup-0.32.0</b><b>]#./InstallGNUstep</b></div>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-OylX4p6AZOg/Usa7hLDDtZI/AAAAAAAABYg/2q_0kTqVMLI/s1600/008.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://2.bp.blogspot.com/-OylX4p6AZOg/Usa7hLDDtZI/AAAAAAAABYg/2q_0kTqVMLI/s1600/008.png" width="400" /></a></div>
+
+Pressione enter para continuar. O script irá validar todas as dependências e lhe pedirá mais uma vez para pressionar enter para continuar.
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-XLigid088Ic/Usa74ro7C-I/AAAAAAAABYo/d4bCtDip8EU/s1600/009.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://3.bp.blogspot.com/-XLigid088Ic/Usa74ro7C-I/AAAAAAAABYo/d4bCtDip8EU/s1600/009.png" width="400" /></a></div>
+
+Veja que existem alguns avisos, porém não tem nenhum erro impeditivo. Basta teclar enter e sair para assistir um filme kkkk, pois este processo demora muito mesmo.
+
+Segue algumas imagens deste processo:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-51FHDsv1mIw/Usa8YAG4EsI/AAAAAAAABYw/sapMdcdf04U/s1600/009-00.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://2.bp.blogspot.com/-51FHDsv1mIw/Usa8YAG4EsI/AAAAAAAABYw/sapMdcdf04U/s1600/009-00.png" width="400" /></a></div>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-ktIIbTgGiWo/Usa8oAgTekI/AAAAAAAABY4/p3ssZmHiZ9g/s1600/009-01.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://4.bp.blogspot.com/-ktIIbTgGiWo/Usa8oAgTekI/AAAAAAAABY4/p3ssZmHiZ9g/s1600/009-01.png" width="400" /></a></div>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-E6rte8cMsOc/Usa8sGSFIHI/AAAAAAAABZA/tHpvnivfzn0/s1600/009-002.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://3.bp.blogspot.com/-E6rte8cMsOc/Usa8sGSFIHI/AAAAAAAABZA/tHpvnivfzn0/s1600/009-002.png" width="400" /></a></div>
+
+Até que finalmente:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-9YfO6Lr1UTg/Usa-pHHsr9I/AAAAAAAABZM/_9K2jD-7qJg/s1600/010.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://1.bp.blogspot.com/-9YfO6Lr1UTg/Usa-pHHsr9I/AAAAAAAABZM/_9K2jD-7qJg/s1600/010.png" width="400" /></a></div>
+
+Agora a base do GNUstep está instalada no nosso ambiente. Ainda faltam alguns pacotes a serem instalados mais se chegamos até aqui, dificilmente haverão problemas no nosso caminho.
+
+<b><u>A partir deste momento irei descrever somente passos que fogem ao padrão de uma instalação Linux por meio do código fonte.</u></b>
+
+<b>7) Vamos instalar o pacote GNUstep Make:</b>
+
+Baixe o arquivo <a href="ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-make-2.6.6.tar.gz" rel="nofollow" target="_blank">gnustep-make-2.6.6.tar.gz</a>, descompacte e inicie o processo de configuração/compilação e instalação.
+
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#wget -c "ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-make-2.6.6.tar.gz"</span></b>
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b> <b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#tar -zxvf gnustep-make-2.6.6.tar.gz</span></b>
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#cd gnustep-make-2.6.6</span></b>
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep-make-2.6.6]#./configure</span></b>
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep-make-2.6.6]#make</span></b>
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep-make-2.6.6]#make install</span></b>
+
+
+<b>8) Agora o pacote GNUstep Base:</b>
+
+Baixe o arquivo <a href="ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-base-1.24.6.tar.gz" rel="nofollow" target="_blank">gnustep-base-1.24.6.tar.gz</a>, descompacte e inicie o processo de configuração/compilação e instalação.
+
+
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#wget -c "ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-base-1.24.6.tar.gz"</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#tar -zxvf gnustep-base-1.24.6.tar.gz</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#cd gnustep-base-1.24.6</span></b></div>
+<div class="p1">
+
+</div>
+<div class="p1">
+Atenção, informar o --prefix=/usr/include é obrigatório. Aqui também teremos tempo de ir tomar um café, pois a compilação também é um pouco demorada.</div>
+<div class="p1">
+
+</div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-base-1.24.6</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#./configure --prefix=/usr/include</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-base-1.24.6</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make</span></b></div>
+<div class="p1">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></div>
+<div class="p1">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">Como um passo adicional, mais não obrigatório, podemos realizar os testes com o comando seguinte:</span></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-base-1.24.6</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make check</span></b></div>
+<div>
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-base-1.24.6</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make install</span></b></div>
+<div class="p1">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></div>
+<div class="p1">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">Aqui também temos de tomar o cuidado de copiar as bibliotecas para a pasta <b>/usr/lib64</b>, pois caso contrário irá nos atrapalhar nos processos seguintes.</span></div>
+<div class="p1">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-base-1.24.6</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#cp -Rvf /usr/local/lib/libgnustep-base* /usr/lib64/</span></b></div>
+<div>
+
+</div>
+<b>9) Vamos instalar o pacote GNUstep GUI:</b>
+
+Baixe o arquivo&nbsp;<span style="font-family: inherit;"><a href="ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-gui-0.24.0.tar.gz" rel="nofollow" target="_blank">gnustep-gui-0.24.0.tar.gz</a></span>, descompacte e inicie o processo de configuração/compilação e instalação.
+<div>
+
+</div>
+
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#wget -c "ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-gui-0.24.0.tar.gz"</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#tar -zxvf gnustep-gui-0.24.0.tar.gz</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#cd gnustep-gui-0.24.0</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-gui-0.24.0</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#./configure</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-gui-0.24.0</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make</span></b></div>
+<div class="p1">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><br class="Apple-interchange-newline" />Como um passo adicional, mais não obrigatório, podemos realizar os testes com o comando seguinte:</span></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-gui-0.24.0</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make check</span></b></div>
+<div>
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-gui-0.24.0</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make install</span></b></div>
+<div class="p1">
+
+</div>
+<b>10) Vamos instalar o pacote GNUstep Back:</b>
+
+
+Baixe o arquivo&nbsp;<a href="ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-back-0.24.0.tar.gz" rel="nofollow" target="_blank">gnustep-back-0.24.0.tar.gz</a>, descompacte e inicie o processo de configuração/compilação e instalação.
+<div>
+
+</div>
+
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#wget -c "ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-back-0.24.0.tar.gz"</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#tar -zxvf gnustep-back-0.24.0.tar.gz</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#cd gnustep-back-0.24.0</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-back-0.24.0</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#./configure</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-back-0.24.0</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-back-0.24.0</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make install</span></b></div>
+<div class="p1">
+
+</div>
+<div class="p1">
+
+</div>
+<div class="p1">
+<b>11) Vamos instalar o pacote GNUstep Corebase:</b></div>
+<br class="Apple-interchange-newline" /> Baixe o arquivo&nbsp;<a href="ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-back-0.24.0.tar.gz" rel="nofollow" target="_blank">gnustep-back-0.24.0.tar.gz</a>, descompacte e inicie o processo de configuração/compilação e instalação.
+<div>
+
+</div>
+
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#wget -c "ftp://ftp.gnustep.org/pub/gnustep/libs/gnustep-corebase-0.1.tar.gz"</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#tar -zxvf gnustep-corebase-0.1.tar.gz</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#cd gnustep-corebase-0.1</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#./configure</span></b></div>
+<div class="p1">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><br class="Apple-interchange-newline" />Como um passo adicional, mais não obrigatório, podemos realizar os testes com o comando seguinte:</span></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-corebase-0.1</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make check</span></b></div>
+<div>
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-corebase-0.1</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make</span></b></div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">gnustep-corebase-0.1</span></b><b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">]#make install</span></b></div>
+<div class="p1">
+
+</div>
+<div class="p1">
+
+</div>
+<div class="p1">
+Agora sim, concluímos toda a instalação do pacote GNUstep, basta simplesmente adicionar uma variável de ambiente para que o processo de make seja menos traumático :D</div>
+<div class="p1">
+
+</div>
+<div class="p1">
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[gnustep]#echo "export GNUSTEP_MAKEFILES=/usr/GNUstep/System/Library/Makefiles" &gt;&gt; /etc/profile</span></b></div>
+
+Nos passos a seguir podemos montar um "Hello world" em Objective-C :D
+Crie um arquivo de nome <b>main.m</b> com o seguinte conteúdo:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-Fq97tVpvjuc/Usbc8cMmoLI/AAAAAAAABZw/S0JtAcXwLFE/s1600/013.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://3.bp.blogspot.com/-Fq97tVpvjuc/Usbc8cMmoLI/AAAAAAAABZw/S0JtAcXwLFE/s1600/013.png" width="400" /></a></div>
+
+Em seguida crie o arquivo <b>GNUmakefiles</b> com o seguinte conteúdo:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-GTgCBXAbEMc/Usbc9e2y2kI/AAAAAAAABZ4/cKGRT0JsU1w/s1600/014.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://1.bp.blogspot.com/-GTgCBXAbEMc/Usbc9e2y2kI/AAAAAAAABZ4/cKGRT0JsU1w/s1600/014.png" width="400" /></a></div>
+
+Agora basta executar o comando <b>make</b>:
+
+<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[obj]#make</span></b>
+
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-8MqwLvLmOk4/Usbc-Rv3WKI/AAAAAAAABaA/tJ5yXUBkfQk/s1600/015.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="221" src="https://1.bp.blogspot.com/-8MqwLvLmOk4/Usbc-Rv3WKI/AAAAAAAABaA/tJ5yXUBkfQk/s1600/015.png" width="400" /></a></div>
+
+Bem, espero que ajude a quem tem interesse de aprender esta linguagem que na minha humilde opinião possui uma sintaxe muito bonita, já ouvi alguns chegarem a dizer que se trata de uma "linguagem orientada a colchetes". Não concordo, é uma linguagem muito simples de se trabalhar, bastante elegante e muito poderosa também.
+
+Até a próxima!
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
