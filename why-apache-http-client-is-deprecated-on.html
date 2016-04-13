@@ -1,0 +1,109 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://hc.apache.org/httpclient-3.x/images/httpclient_logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://hc.apache.org/httpclient-3.x/images/httpclient_logo.png" height="98" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://www.android.com/new/images/logos-2x/android-wordmark-8EC047.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://www.android.com/new/images/logos-2x/android-wordmark-8EC047.png" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+
+</div>
+
+
+If you are a Android developer too, you already see that in API level 22 all classes into package "<b>org.apache.http.client</b>" are now deprecated.
+
+So, why??
+
+Well, if you look on this <a href="http://developer.android.com/reference/org/apache/http/client/HttpClient.html" rel="nofollow" target="_blank">page</a>, and more precisely you need to pay attention on that:
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-5RnqLMw745M/VbI7_LYGY4I/AAAAAAAACnE/OyXgX7stWNc/s1600/Screenshot%2Bfrom%2B2015-07-24%2B10%253A21%253A07.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="140" src="https://1.bp.blogspot.com/-5RnqLMw745M/VbI7_LYGY4I/AAAAAAAACnE/OyXgX7stWNc/s640/Screenshot%2Bfrom%2B2015-07-24%2B10%253A21%253A07.png" width="640" /></a></div>
+<div style="text-align: justify;">
+if you access that <a href="http://android-developers.blogspot.com.br/2011/09/androids-http-clients.html" rel="nofollow" target="_blank">page</a> for further details, what you will read is what motivate this libraries are deprecated on Android.</div>
+
+So, apparently, the only problem about the Apache HTTP Client is the large size of the library. And because the Android has all java.net.* package they decide that they will not work on Apache HTTP Client any more.
+
+<div style="text-align: justify;">
+So, if you use the <a href="https://android.googlesource.com/platform/frameworks/volley" rel="nofollow" target="_blank">Library Volley</a>? Well, i actually eve been in a problem like this, i got a project when they decide to use this library, but when a see all classes from Apache HTTP Client marked as&nbsp;<b>@Deprecated</b>, i had to make a decision: Strip this library from the project. So, and how do this, in a way that a don't need make a lot of refactorings? Well, i decide to make my own library usi<span style="font-family: inherit;">ng <b>HttpURLConnection</b> support. So, after a few hours i finish a first version and make some tests on that project, i remove all Volley references, and i start to use my own implementation.</span></div>
+<div style="text-align: left;">
+<span style="font-family: inherit;">
+</span></div>
+<div style="text-align: left;">
+<span style="font-family: inherit;">So, i decide to put this project on&nbsp;</span><span style="color: #0000ee;"><u>GitHub</u></span><span style="font-family: inherit;">. If, some one wants to get some help, please be my&nbsp;</span>guest<span style="font-family: inherit;">.</span></div>
+<div style="text-align: left;">
+<span style="font-family: inherit;">
+</span></div>
+<div style="text-align: left;">
+<span style="font-family: inherit;">** Also i create a simple project to demonstrate how use this library.</span></div>
+<div style="text-align: left;">
+<span style="font-family: inherit;">
+</span></div>
+<div style="text-align: justify;">
+<span style="font-family: inherit;">*** So, is a simple work, in a initial stage &nbsp;of course that has bugs, and also exists a lot of others features that need to be implemented. But, for now this library covers all my needs on this project. And, once more, if anyone wants to help, please make a fork of that project on&nbsp;</span>GitHub<span style="font-family: inherit;">.</span></div>
+<div style="text-align: justify;">
+<span style="font-family: inherit;">
+</span></div>
+<div style="text-align: justify;">
+<span style="font-family: inherit;"></span>
+<!--more-->
+
+<span style="font-family: inherit;">Readme:</span>
+<span style="font-family: inherit;">
+</span> 
+<div style="box-sizing: border-box; color: #333333; line-height: 25.6000003814697px; margin-bottom: 16px; text-align: start;">
+<span style="font-family: inherit;">To use, just make those imports:</span></div>
+<div class="highlight highlight-java" style="box-sizing: border-box; color: #333333; font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif; font-size: 16px; line-height: 25.6000003814697px; margin-bottom: 16px; text-align: start;">
+<pre style="background-color: #f7f7f7; border-radius: 3px; box-sizing: border-box; font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 13.6000003814697px; font-stretch: normal; line-height: 1.45; overflow: auto; padding: 16px; word-break: normal; word-wrap: normal;"><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">import</span> <span class="pl-smi" style="box-sizing: border-box;">br.com.softctrl.http.util.HTTPStatusCode.StatusCode</span>;
+<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">import</span> <span class="pl-smi" style="box-sizing: border-box;">br.com.softctrl.rest.listener.RequestFinishedListener</span>;
+<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">import</span> <span class="pl-smi" style="box-sizing: border-box;">br.com.softctrl.rest.listener.ResponseErrorListener</span>;
+<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">import</span> <span class="pl-smi" style="box-sizing: border-box;">br.com.softctrl.rest.listener.ResponseListener</span>;</pre>
+</div>
+<div style="box-sizing: border-box; color: #333333; font-size: 16px; line-height: 25.6000003814697px; margin-bottom: 16px; text-align: start;">
+<span style="font-family: inherit;">And create this listeners:</span></div>
+<div class="highlight highlight-java" style="box-sizing: border-box; color: #333333; font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif; font-size: 16px; line-height: 25.6000003814697px; margin-bottom: 16px; text-align: start;">
+<pre style="background-color: #f7f7f7; border-radius: 3px; box-sizing: border-box; font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 13.6000003814697px; font-stretch: normal; line-height: 1.45; overflow: auto; padding: 16px; word-break: normal; word-wrap: normal;"><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">ResponseListener&lt;<span class="pl-smi" style="box-sizing: border-box; color: #333333;">String</span>&gt;</span> responseListener <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">=</span> <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">new</span> <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">ResponseListener&lt;<span class="pl-smi" style="box-sizing: border-box; color: #333333;">String</span>&gt;</span>() {            
+            <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">@Override</span>
+            <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">public</span> <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">void</span> <span class="pl-en" style="box-sizing: border-box; color: #795da3;">onResponse</span>(<span class="pl-smi" style="box-sizing: border-box;">String</span> <span class="pl-v" style="box-sizing: border-box; color: #ed6a43;">response</span>) {
+                <span class="pl-smi" style="box-sizing: border-box;">System</span><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>out<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>println(<span class="pl-s" style="box-sizing: border-box; color: #183691;"><span class="pl-pds" style="box-sizing: border-box;">"</span>####ResponseListener<span class="pl-pds" style="box-sizing: border-box;">"</span></span>);
+                <span class="pl-smi" style="box-sizing: border-box;">System</span><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>out<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>println(response);
+            }
+        };
+        <span class="pl-smi" style="box-sizing: border-box;">ResponseErrorListener</span> responseErrorListener <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">=</span> <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">new</span> <span class="pl-smi" style="box-sizing: border-box;">ResponseErrorListener</span>() {         
+            <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">@Override</span>
+            <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">public</span> <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">void</span> <span class="pl-en" style="box-sizing: border-box; color: #795da3;">onResponseError</span>(<span class="pl-smi" style="box-sizing: border-box;">StatusCode</span> <span class="pl-v" style="box-sizing: border-box; color: #ed6a43;">statusCode</span>, <span class="pl-smi" style="box-sizing: border-box;">String</span> <span class="pl-v" style="box-sizing: border-box; color: #ed6a43;">serverMessage</span>, <span class="pl-smi" style="box-sizing: border-box;">Throwable</span> <span class="pl-v" style="box-sizing: border-box; color: #ed6a43;">throwable</span>) {
+                <span class="pl-smi" style="box-sizing: border-box;">System</span><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>out<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>println(<span class="pl-s" style="box-sizing: border-box; color: #183691;"><span class="pl-pds" style="box-sizing: border-box;">"</span>####ResponseErrorListener<span class="pl-pds" style="box-sizing: border-box;">"</span></span>);
+                <span class="pl-smi" style="box-sizing: border-box;">System</span><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>out<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>println(statusCode);
+                <span class="pl-smi" style="box-sizing: border-box;">System</span><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>out<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>println(serverMessage);
+                <span class="pl-smi" style="box-sizing: border-box;">System</span><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>out<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>println(throwable);
+            }
+        };
+        <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">RequestFinishedListener&lt;<span class="pl-smi" style="box-sizing: border-box; color: #333333;">String</span>&gt;</span> requestFinishedListener <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">=</span> <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">new</span> <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">RequestFinishedListener&lt;<span class="pl-smi" style="box-sizing: border-box; color: #333333;">String</span>&gt;</span>() {           
+            <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">@Override</span>
+            <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">public</span> <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">void</span> <span class="pl-en" style="box-sizing: border-box; color: #795da3;">onRequestFinished</span>(<span class="pl-smi" style="box-sizing: border-box;">StatusCode</span> <span class="pl-v" style="box-sizing: border-box; color: #ed6a43;">statusCode</span>, <span class="pl-smi" style="box-sizing: border-box;">String</span> <span class="pl-v" style="box-sizing: border-box; color: #ed6a43;">response</span>) {
+                <span class="pl-smi" style="box-sizing: border-box;">System</span><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>out<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>println(<span class="pl-s" style="box-sizing: border-box; color: #183691;"><span class="pl-pds" style="box-sizing: border-box;">"</span>####RequestFinishedListener<span class="pl-pds" style="box-sizing: border-box;">"</span></span>);
+                <span class="pl-smi" style="box-sizing: border-box;">System</span><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>out<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>println(statusCode);
+                <span class="pl-smi" style="box-sizing: border-box;">System</span><span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>out<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>println(response);
+            }
+        };</pre>
+</div>
+<div style="box-sizing: border-box; color: #333333; font-size: 16px; line-height: 25.6000003814697px; margin-bottom: 16px; text-align: start;">
+<span style="font-family: inherit;">You just need create a better client that you need, or maybe you can create your own(and send a pull request =D ):</span></div>
+<div class="highlight highlight-java" style="box-sizing: border-box; color: #333333; font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif; font-size: 16px; line-height: 25.6000003814697px; margin-bottom: 16px; text-align: start;">
+<pre style="background-color: #f7f7f7; border-radius: 3px; box-sizing: border-box; font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 13.6000003814697px; font-stretch: normal; line-height: 1.45; overflow: auto; padding: 16px; word-break: normal; word-wrap: normal;"><span class="pl-smi" style="box-sizing: border-box;">StringHTTPRestfulClient</span> restfulClient <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">=</span> <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">new</span> <span class="pl-smi" style="box-sizing: border-box;">StringHTTPRestfulClient</span>(responseListener, responseErrorListener,
+                requestFinishedListener);</pre>
+</div>
+<div style="box-sizing: border-box; color: #333333; font-size: 16px; line-height: 25.6000003814697px; margin-bottom: 16px; text-align: start;">
+<span style="font-family: inherit;">And finally:</span></div>
+<div class="highlight highlight-java" style="box-sizing: border-box; color: #333333; font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif; font-size: 16px; line-height: 25.6000003814697px; margin-bottom: 16px; text-align: start;">
+<pre style="background-color: #f7f7f7; border-radius: 3px; box-sizing: border-box; font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 13.6000003814697px; font-stretch: normal; line-height: 1.45; overflow: auto; padding: 16px; word-break: normal; word-wrap: normal;"><span class="pl-smi" style="box-sizing: border-box;">String</span> url <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">=</span> <span class="pl-s" style="box-sizing: border-box; color: #183691;"><span class="pl-pds" style="box-sizing: border-box;">"</span>http://www.0x09.com.br/<span class="pl-pds" style="box-sizing: border-box;">"</span></span>;
+        <span class="pl-smi" style="box-sizing: border-box;">String</span> body <span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">=</span> <span class="pl-c1" style="box-sizing: border-box; color: #0086b3;">null</span>;
+        restfulClient<span class="pl-k" style="box-sizing: border-box; color: #a71d5d;">.</span>get(url, body);</pre>
+</div>
+</div>
+<div style="text-align: justify;">
+<span style="font-family: inherit;">thanks.</span></div>
+<div style="text-align: justify;">
+<a href="https://github.com/softctrl/fly-rest">https://github.com/softctrl/fly-rest</a></div>
+<div style="text-align: justify;">
+<a href="http://android-developers.blogspot.com.br/2011/09/androids-http-clients.html">http://android-developers.blogspot.com.br/2011/09/androids-http-clients.html</a></div>
+<div style="text-align: justify;">
+
+</div>
+</div>
