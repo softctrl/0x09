@@ -1,0 +1,127 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-nznXWhe9fUY/VITG7eWZolI/AAAAAAAACRA/wIyKTfEiF2s/s1600/20141207_192544.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://1.bp.blogspot.com/-nznXWhe9fUY/VITG7eWZolI/AAAAAAAACRA/wIyKTfEiF2s/s1600/20141207_192544.jpg" width="400" /></a></div>
+
+Olá a todos. Uma das maiores "febres" no mundo embarcado se deve ao surgimento das famosas placas Arduino. Como vocês podem notar a placa acima é uma placa Arduino UNO.
+
+Bem, o esquema para este projeto é bastante simples como vocês poderão ver na próxima imagem:
+<div class="separator" style="clear: both; text-align: center;">
+
+</div>
+<div style="text-align: center;">
+<a href="http://3.bp.blogspot.com/--VoLH-ke7pM/VITwuDfZLdI/AAAAAAAACR0/B50x3dduNWE/s1600/Screen%2BShot%2B2014-12-07%2Bat%2B10.41.59%2BPM.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em; text-align: justify;"><img border="0" height="310" src="https://3.bp.blogspot.com/--VoLH-ke7pM/VITwuDfZLdI/AAAAAAAACR0/B50x3dduNWE/s1600/Screen%2BShot%2B2014-12-07%2Bat%2B10.41.59%2BPM.png" width="400" /></a></div>
+
+<div class="separator" style="clear: both; text-align: left;">
+Basicamente o que este circuito faz é que ao alimentarmos a base do nosso transistor o mesmo permitirá que a corrente flua fechando o circuito para que o nosso relê seja ativado. Este por sua vez irá fechar o contato e então um equipamento de tensão 115V com corrente máxima de 15A poderá ser acionado.</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Na imagem abaixo vocês verão o circuito que eu fiz na caneta mesmo :D só para demonstrar o circuito depois de pronto.</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-GSM2KVTCx-s/VITuGTBTuKI/AAAAAAAACRc/wf0NTYSbNhI/s1600/20141207_194321.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://4.bp.blogspot.com/-GSM2KVTCx-s/VITuGTBTuKI/AAAAAAAACRc/wf0NTYSbNhI/s1600/20141207_194321.jpg" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Logo abaixo vocês podem ver o circuito já com os componentes soldados a placa:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-Envf6Dzf194/VITuFmEcxEI/AAAAAAAACRQ/vZVItGvGlXE/s1600/20141207_194311.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://2.bp.blogspot.com/-Envf6Dzf194/VITuFmEcxEI/AAAAAAAACRQ/vZVItGvGlXE/s1600/20141207_194311.jpg" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Apesar de eu não ter incluído o resistor entre a base do transistor e a fonte de 5V, posso dizer que não há problemas pois o circuito esta totalmente funcional.</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-lhhhvvbAbNU/VITuKT8NvhI/AAAAAAAACRo/yRux6iztZhc/s1600/20141207_194348.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://4.bp.blogspot.com/-lhhhvvbAbNU/VITuKT8NvhI/AAAAAAAACRo/yRux6iztZhc/s1600/20141207_194348.jpg" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Agora que o protótipo está montado podemos desenvolver um pequeno sketch para controlar nosso "módulo relê":</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+</div>
+<pre style="background: rgb(240, 240, 240); border: 1px dashed rgb(204, 204, 204); font-family: arial; font-size: 12px; height: auto; line-height: 20px; overflow: auto; padding: 0px; text-align: left; width: 99%;"><code style="color: black; word-wrap: normal;"> </code><code style="word-wrap: normal;"><span style="color: orange;">int</span></code><code style="color: black; word-wrap: normal;"> LED_13 = 13; // Led que usaremos para indicar que o relê foi acionado
+
+
+
+</code><code style="word-wrap: normal;"><span style="color: orange;">void</span></code><code style="color: black; word-wrap: normal;"> </code><code style="word-wrap: normal;"><span style="color: orange;">setup</span></code><code style="color: black; word-wrap: normal;">() {                
+  </code><code style="word-wrap: normal;"><span style="color: orange;">pinMode</span></code><code style="color: black; word-wrap: normal;">(LED_13, </code><code style="word-wrap: normal;"><span style="color: #9fc5e8;">OUTPUT</span></code><code style="color: black; word-wrap: normal;">);
+  </code><code style="word-wrap: normal;"><span style="color: orange;">pinMode</span></code><code style="color: black; word-wrap: normal;">(A0, </code><code style="word-wrap: normal;"><span style="color: #9fc5e8;">OUTPUT</span></code><code style="color: black; word-wrap: normal;">); // Tratar o pino analogico A0 como se fosse digital
+}
+
+</code><code style="word-wrap: normal;"><span style="color: orange;">void</span></code><code style="color: black; word-wrap: normal;"> </code><code style="word-wrap: normal;"><span style="color: orange;">loop</span></code><code style="color: black; word-wrap: normal;">() {
+  
+  // Acionar o modulo relê ao passo que a luz do led ficara aceso indicando relê acionado:
+  </code><code style="word-wrap: normal;"><span style="color: orange;">digitalWrite</span></code><code style="color: black; word-wrap: normal;">(A0, </code><code style="word-wrap: normal;"><span style="color: #9fc5e8;">HIGH</span></code><code style="color: black; word-wrap: normal;">);     // Acionar circuito com o rele
+  </code><code style="word-wrap: normal;"><span style="color: orange;">digitalWrite</span></code><code style="color: black; word-wrap: normal;">(LED_13, </code><code style="word-wrap: normal;"><span style="color: #9fc5e8;">HIGH</span></code><code style="color: black; word-wrap: normal;">); // Ligar LED
+  
+  </code><code style="word-wrap: normal;"><span style="color: orange;">delay</span></code><code style="color: black; word-wrap: normal;">(2000); // Aguarde 2 segundos
+  // Desativar o circuito do rele e desligar o led:  
+  </code><code style="word-wrap: normal;"><span style="color: orange;">digitalWrite</span></code><code style="color: black; word-wrap: normal;">(A0, </code><code style="word-wrap: normal;"><span style="color: #9fc5e8;">LOW</span></code><code style="color: black; word-wrap: normal;">);
+  </code><code style="word-wrap: normal;"><span style="color: orange;">digitalWrite</span></code><code style="color: black; word-wrap: normal;">(LED_13, </code><code style="word-wrap: normal;"><span style="color: #9fc5e8;">LOW</span></code><code style="color: black; word-wrap: normal;">);
+  </code><code style="word-wrap: normal;"><span style="color: orange;">delay</span></code><code style="color: black; word-wrap: normal;">(2000); // Aguarde 2 segundos
+  
+}
+</code></pre>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Viram como é simples este sketch?</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Bem, agora que tal vermos o módulo em ação:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Veja, estou usando um multímetro para testar a continuidade:</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-0X9h9S6mezY/VIWVdEaq9iI/AAAAAAAACSI/pZMbBu0vsdw/s1600/20141208_101906.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://3.bp.blogspot.com/-0X9h9S6mezY/VIWVdEaq9iI/AAAAAAAACSI/pZMbBu0vsdw/s1600/20141208_101906.jpg" width="400" /></a></div>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-DpPBxMAvUWs/VIWVc6wAKZI/AAAAAAAACSE/2Qzg5zX960s/s1600/20141208_101908.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://3.bp.blogspot.com/-DpPBxMAvUWs/VIWVc6wAKZI/AAAAAAAACSE/2Qzg5zX960s/s1600/20141208_101908.jpg" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+No vídeo abaixo fica mais claro como o teste foi realizado:
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+
+<div class="separator" style="clear: both; text-align: center;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<object class="BLOGGER-youtube-video" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" data-thumbnail-src="https://i.ytimg.com/vi/o3CFlgbEzY8/0.jpg" height="366" width="420"><param name="movie" value="https://www.youtube.com/v/o3CFlgbEzY8?version=3&f=user_uploads&c=google-webdrive-0&app=youtube_gdata" /><param name="bgcolor" value="#FFFFFF" /><param name="allowFullScreen" value="true" /><embed width="320" height="266"  src="https://www.youtube.com/v/o3CFlgbEzY8?version=3&f=user_uploads&c=google-webdrive-0&app=youtube_gdata" type="application/x-shockwave-flash" allowfullscreen="true"></embed></object></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Na seqüência deste post mostrarei o circuito controlando um equipamento doméstico, ou mesmo uma simples lâmpada</div>
+</div>
+</div>
+</div>
