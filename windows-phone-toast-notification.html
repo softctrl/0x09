@@ -1,0 +1,291 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<span style="text-align: justify;">Atualmente estou desenvolvendo um projeto para o Windows Phone (me lembra das épocas em que eu desenvolvia para Windows CE e Windows Mobile :D ).</span>
+
+<div style="text-align: justify;">
+Como linguagem escolhida para desenvolvimento eu preferi C++/CLI que está oficialmente especificada no documento ECMA-372 que data de dezembro 2005. Em palavras curtas, C++/CLI é uma especificação de C++ que veio para substituir o set de tecnologias desenvolvido pela Microsoft conhecido como "<a href="http://msdn.microsoft.com/en-us/library/Aa712867" target="_blank">Managed Extensions for C++</a>" sendo que este último encontra-se obsoleto e foi totalmente substituído pela tecnologia C++/CLI. Bem, eu gosto de lembrar dessa linguagem como uma tentativa bem sucedida de dar à linguagem C++ tudo o que o Dot.Net tem a oferecer e que por sua fez foi bem copiado da plataforma Java :D.</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+Sou evangelista Java e não nego, uso Linux ha aproximadamente 8 anos, mais não escondo que comecei a desenvolver programas usando tecnologias voltadas para Microsoft (saudades do Clipper kkk).</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+Mais enfim, parei para me aventurar nessa nova especificação, mais por ser voltada para C++ entendi que não haveriam muitos problemas. Na realidade a especificação é bastante simples, e o que mais me agradou foi ter acesso ao garbage collector bem como a utilização de safe code, coisas que em C++ não possuímos. Quem sabe futuramente eu aborde mais detalhes da linguagem em um próximo post. Agora vamos a um pequeno comparativo quando estamos desenvolvendo um projeto para Android.</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+O Android possui um dos ambientes mais completos quanto a ferramentas de desenvolvimento com vasta documentação no próprio site da Google e extensa literatura disponível no mercado. Quanto a isso não temos do que reclamar, pois o Visual Studio 2013 vem seguindo o padrão da Ferramenta Visual Studio, que é ótima para desenvolvimento, fora que a Microsoft como sempre :) copiou o que está dando certo nas outras ferramentas IDE do mercado, e no próprio site da Microsoft encontramos vasto material de auxílio, bem como exemplos prontos para testar, e pelo que pesquisei também já existem centenas de livros à nossa disposição.</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+O interessante é que não tive problemas na linguagem, nem no ambiente de desenvolvimento, apesar de que eu terei de comprar um smartphone com Windows Phone pois o desktop que estou usando não provê suporte a virtualização pois o emulador somente roda em plataformas 64bits :(, Aliás, não sei o que é mais triste: O emulador só funcionar em 64bits ou eu ainda estar usando um desktop 32bits!!! kkkk</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+Aproveitando, como usuário de Linux que sou há vários anos, não sou do tipo de pessoa que se sente confortável com pirataria de software. Estou acostumado a usar somente ferramentas open source e desde que comecei a usar Linux passei a ter este "estilo de vida", de forma que me senti mal em pensar em usar Windows crackeado e fui atrás de comprar a licença do mesmo. Para minha surpresa como estou em um curso de nível superior, pude me beneficiar da store educacional da Microsoft, e a licença do Windows 8.1 Pro saiu por incríveis R$ 119,00 (em reais mesmo :D). Então estou com minha licença comprada tudo certinho. Fui procurar então comprar a licença do Visual Studio 2013 mas mesmo na store educacional fica R$ 795,00, ou seja prefiro juntar esta grana para comprar o smartphone com Windows Phone e usar o Visual Studio Express mesmo. Para quem estiver em um curso de nível superior e quiser comprar o link é este abaixo:</div>
+<div style="text-align: justify;">
+<a href="http://www.microsoftstore.com/store/msbr/pt_BR/list/Estudantes/categoryID.66270500" target="_blank">http://www.microsoftstore.com/store</a></div>
+
+<div style="text-align: justify;">
+Bem, Windows 8 instalado com licença regularizada e Visual Studio 2013 Express instalado comecei a portar um projeto meu de Android para Windows Phone.</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+Como já era de se esperar o Visual Studio se mostrou uma ferramenta completa e eficiente para desenvolvimento do Projeto. A linguagem C++/CLI é simples e eficiente. Agora arquitetura desenvolvida pela Microsoft (Valha-me DEUS!!!! ninguém, merece. Quase me fez lembrar meus tempos de Charles Petzold kkkk). Quando eu comecei a desenvolver para Win32 quem me auxiliou nessa aventura foi um Livro de Charles Petzold. :D Quem não lembra do bom e velho "Hello World!" feito para Windows 98?</div>
+<div style="text-align: justify;">
+
+</div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">/*−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">HelloMsg.c −− Displays "Hello, Windows 98!" in a message box</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">(c) Charles Petzold, 1998</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−*/</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">#<b>include </b>&lt;windows.h&gt;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span> <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>int </b>WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">PSTR szCmdLine, <b>int </b>iCmdShow)</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">{</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>MessageBox </b>(NULL, <b>TEXT</b> ("Hello, Windows 98!"), <b>TEXT </b>("HelloMsg"), 0) ;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>return </b>0 ;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">}</span>
+
+E que tal criar uma janela:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">hwnd = <b>CreateWindow </b>(szAppName, // nome da classe window</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>TEXT</b> ("The Hello Program"), // caption</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>WS_OVERLAPPEDWINDOW</b>, // window style</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>CW_USEDEFAULT</b>, // x position</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>CW_USEDEFAULT</b>, // y position</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>CW_USEDEFAULT</b>, // x size</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>CW_USEDEFAULT</b>, // y size</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>NULL</b>, // parent handle</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>NULL</b>, // window menu handle</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">hInstance, // program instance handle</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>NULL</b>) ;</span>
+
+kkkk eram tempos difíceis(nem tanto)!!!!!
+
+<div style="text-align: justify;">
+Mas, eu pensando que tudo havia mudado, me enganei completamente. Sabe o que mais me deu trabalho? Acreditem, criar uma mensagem de notificação semelhante ao Toast no Android. A microsoft copiou alguns nomes de métodos e inclusive deixou bem parecido com o concorrente Google, mais a semelhança só ficou nos nomes kkkk.</div>
+<div style="text-align: justify;">
+
+</div>
+Bem, vamos ao que interessa:
+
+<div style="text-align: justify;">
+No Android um evento Toast provê um simples feedback sobre alguma operação qualquer dentro de um pequeno popup.</div>
+<div style="text-align: justify;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://developer.android.com/images/toast.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://developer.android.com/images/toast.png" height="134" width="200" /></a></div>
+
+No Windows Phone a funcionalidade é a mesma:
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC619123.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC619123.png" height="176" width="200" /></a></div>
+<span style="text-align: justify;">Bem, no Android com poucas linhas de código podemos gerar um Toast para o nosso usuário</span>
+<div style="text-align: justify;">
+Dentro da nossa Activity podemos simplesmente digitar:</div>
+<div style="text-align: justify;">
+
+</div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">...</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>Toast</b>.<b>makeText</b>(<b>getApplicationContext</b>(),&nbsp;"Texto da mensagem.",&nbsp;<b>Toast</b>.<b>LENGTH_SHORT</b>).<b>show</b>();</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">...</span>
+
+Nossa mensagem será apresentada para o o usuário imediatamente.Simples, não?!?!
+
+Bem, agora vamos à pequena dor de cabeça que a Microsoft me deu:
+
+<div style="text-align: justify;">
+Primeiro saiba que existem modelos fixos a serem utilizados como layout em cada Toast que você for apresentar. Para facilitar segue uma tabela com os modelos possíveis:</div>
+<div style="text-align: justify;">
+
+</div>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; width: 699px;"><colgroup><col style="width: 225pt;" width="300"></col> <col style="width: 44pt;" width="58"></col> <col style="width: 430pt;" width="573"></col> </colgroup><tbody>
+<tr height="20" style="height: 15pt;">       <td class="xl69" colspan="3" height="20" style="background-color: #cccccc; height: 15pt; text-align: center; width: 699pt;" width="931"><b>Windows 8</b></td>     </tr>
+<tr height="20" style="height: 15pt;">       <td class="xl65" height="20" style="background-color: #cccccc; border-top: medium none; height: 15pt;"><b>Atributo do Enum ToastTemplateType&nbsp;</b></td>       <td class="xl65" style="background-color: #cccccc; border-left: medium none; border-top: medium none;"><b>Número</b></td>       <td class="xl65" style="background-color: #cccccc; border-left: medium none; border-top: medium none;"><b>Descrição</b></td>     </tr>
+<tr height="40" style="height: 30pt;">       <td class="xl67" height="40" style="border-top: medium none; height: 30pt;">ToastImageAndText01|toastImageAndText01</td>       <td class="xl68" style="border-left: medium none; border-top: medium none;"><div style="text-align: center;">
+0</div>
+</td>       <td class="xl66" style="border-left: medium none; border-top: medium none; width: 430pt;" width="573">Uma imagem grande com um texto simples com
+quebra de linha em no máximo três linhas.
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC601606.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC601606.png" height="74" width="320" /></a></div>
+
+</td>     </tr>
+<tr height="40" style="height: 30pt;">       <td class="xl67" height="40" style="border-top: medium none; height: 30pt;">ToastImageAndText02|toastImageAndText02</td>       <td class="xl68" style="border-left: medium none; border-top: medium none;"><div style="text-align: center;">
+1</div>
+</td>       <td class="xl66" style="border-left: medium none; border-top: medium none; width: 430pt;" width="573">Uma imagem grande com um texto em negrito na
+primeira linha e um texto com quebra de linha em duas linhas.
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC601607.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC601607.png" height="74" width="320" /></a></div>
+
+</td>     </tr>
+<tr height="40" style="height: 30pt;">       <td class="xl67" height="40" style="border-top: medium none; height: 30pt;">ToastImageAndText03|toastImageAndText03</td>       <td class="xl68" style="border-left: medium none; border-top: medium none;">2</td>       <td class="xl66" style="border-left: medium none; border-top: medium none; width: 430pt;" width="573">Uma imagem grande, um texto em negrito em duas
+linhas e um texto simples na terceira linha.
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC601608.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC601608.png" height="74" width="320" /></a></div>
+
+</td>     </tr>
+<tr height="40" style="height: 30pt;">       <td class="xl67" height="40" style="border-top: medium none; height: 30pt;">ToastImageAndText04|toastImageAndText04</td>       <td class="xl68" style="border-left: medium none; border-top: medium none;"><div style="text-align: center;">
+3</div>
+</td>       <td class="xl66" style="border-left: medium none; border-top: medium none; width: 430pt;" width="573">Uma imagem grande, um texto em negrito na primeira linha, um texto simples na segunda linha e um outro texto também simples na terceira linha.
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC601609.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC601609.png" height="74" width="320" /></a></div>
+
+</td>     </tr>
+<tr height="20" style="height: 15pt;">       <td class="xl67" height="20" style="border-top: medium none; height: 15pt;">ToastText01|toastText01</td>       <td class="xl68" style="border-left: medium none; border-top: medium none;"><div style="text-align: center;">
+4</div>
+</td>       <td class="xl66" style="border-left: medium none; border-top: medium none; width: 430pt;" width="573">Um texto simples com quebra de linha com no máximo três linhas.
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC601602.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC601602.png" height="74" width="320" /></a></div>
+
+</td>     </tr>
+<tr height="20" style="height: 15pt;">       <td class="xl67" height="20" style="border-top: medium none; height: 15pt;">ToastText02|toastText02</td>       <td class="xl68" style="border-left: medium none; border-top: medium none;"><div style="text-align: center;">
+5</div>
+</td>       <td class="xl66" style="border-left: medium none; border-top: medium none; width: 430pt;" width="573">Um texto em negrito na primeira linha e um texto com quebra de linha em duas linhas.
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC601603.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC601603.png" height="74" width="320" /></a></div>
+
+</td>     </tr>
+<tr height="20" style="height: 15pt;">       <td class="xl67" height="20" style="border-top: medium none; height: 15pt;">ToastText03|toastText03</td>       <td class="xl68" style="border-left: medium none; border-top: medium none;"><div style="text-align: center;">
+6</div>
+</td>       <td class="xl66" style="border-left: medium none; border-top: medium none; width: 430pt;" width="573">Um texto em negrito em duas linhas e um texto simples na terceira linha.
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC601604.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC601604.png" height="74" width="320" /></a></div>
+
+</td>     </tr>
+<tr height="40" style="height: 30pt;">       <td class="xl67" height="40" style="border-top: medium none; height: 30pt;">ToastText04|toastText04</td>       <td class="xl68" style="border-left: medium none; border-top: medium none;"><div style="text-align: center;">
+7</div>
+</td>       <td class="xl66" style="border-left: medium none; border-top: medium none; width: 430pt;" width="573">Um texto em negrito na primeira linha, um texto simples na segunda linha e um outro texto também simples na terceira
+linha.
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC601605.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC601605.png" height="74" width="320" /></a></div>
+
+</td>     </tr>
+<tr height="20" style="height: 15pt;">       <td class="xl69" colspan="3" height="20" style="background-color: #cccccc; height: 15pt;"><div style="text-align: center;">
+<b>Windows Phone</b></div>
+</td>     </tr>
+<tr height="40" style="height: 30pt;">       <td class="xl67" height="40" style="border-top: medium none; height: 30pt;">ToastText02|toastText02 (Modificado)</td>       <td class="xl68" style="border-left: medium none; border-top: medium none;"><div style="text-align: center;">
+&nbsp;5</div>
+</td>       <td class="xl66" style="border-left: medium none; border-top: medium none; width: 430pt;" width="573">Um ícone 150x150 do logo da aplicação com um texto em negrito na primeira linha seguido de um texto simples também na mesma linha.
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://i.msdn.microsoft.com/dynimg/IC717281.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://i.msdn.microsoft.com/dynimg/IC717281.png" height="42" width="320" /></a></div>
+
+</td>     </tr>
+</tbody> </table>
+
+Bem, só o nome dos atributos no enum ninguém merece, nada intuitivos!!!
+
+Bem, depois de escolhido o template a ser usado na notificação, vamos ao que interessa, CODIFICAR!!
+
+<div style="text-align: justify;">
+É importante saber que toda a gama de objetos que iremos utilizar pertencem aos namespace <b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">Windows::UI::Notifications</span></b> e&nbsp;<b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">Windows::Data::Xml::Dom</span></b>. Então se preferir pode importar logo dentro da classe que for usar para fazer uma chamada ao ToastNotification:</div>
+<div style="text-align: justify;">
+
+</div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">...</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">using namespace</span> </b>Windows::UI::Notifications;</span>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">using namespace </span></b>Windows::Data::Xml::Dom;</span></div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">...</span>
+
+
+<div style="text-align: justify;">
+Feito isso, escolha o modelo que mais se adequar ao seu programa, isso se for para Windows 8, ou caso seja Windows Phone escolha <strike>qualquer um</strike> desde que seja o ToastText02 (kkkkkkkkk).</div>
+<div style="text-align: justify;">
+
+</div>
+Bem, como estou me ambientando no desktop pois não tenho um desktop 64bits e nem um smartphone com Windows Phone ainda, eu vou usar o template <b>ToastImageAndText01.</b> Para isso:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">...</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">ToastTemplateType </span></b>toastModelo = <b><span style="color: blue;">ToastTemplateType</span></b>::<b><span style="color: blue;">ToastImageAndText01</span></b>;&nbsp;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">XmlDocument</span></b>^ toastXmlDocument = <b><span style="color: blue;">ToastNotificationManager</span></b>::<b><span style="color: blue;">GetTemplateContent</span></b>(toastTemplate);</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">...</span>
+
+<div style="text-align: justify;">
+O método GetTemplateContent nos devolve um XmlDocument com o XML do modelo escolhido. De posse desse objeto XmlDocument temos agora que alimentar os dados que queremos apresentar para o usuário. Os dados pelo modelo escolhido devem ser uma imagem e um texto. Então vamos lá:</div>
+<div style="text-align: justify;">
+
+</div>
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">...</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">// Informando a imagem a ser exibida</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><span style="color: blue;"><b>XmlNodeList</b></span>^ toastImageElements =&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">toastXmlDocument</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">-&gt;<span style="color: blue;"><b>GetElementsByTagName</b></span>("image");</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">// Neste caso eu estou usando uma imagem da internet</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">// mas poderia ser do próprio projeto:</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">static_cast</span></b>&lt;<b><span style="color: blue;">XmlElement</span></b>^&gt;(toastImageElements-&gt;<b><span style="color: blue;">Item</span></b>(0))-&gt;<b><span style="color: blue;">SetAttrib</span></b></span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">ute</span></b>("src", "http://url_da_imagem"</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">);</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">static_cast</span></b>&lt;<b><span style="color: blue;">XmlElement</span></b>^&gt;(toastImageElements-&gt;<b><span style="color: blue;">Item</span></b>(0))-&gt;<b><span style="color: blue;">SetAttrib</span></b></span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">ute</span></b>("alt", "graphic"</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">);</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">// Informando o texto a ser exibido</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><span style="color: blue;"><b>XmlNodeList</b></span>^ toastTextElements =&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">toastXmlDocument</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">-&gt;<b><span style="color: blue;">GetElementsByTagName</span></b>("text");</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">toastTextElements-&gt;<b><span style="color: blue;">Item</span></b>(0)-&gt;<b><span style="color: blue;">InnerText </span></b>= "Ocorreu um erro no sistema!";</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">// Informando a duração do Toast</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">IXmlNode</span></b>^ toastNode = toastXmlDocument-&gt;<b><span style="color: blue;">SelectSingleNode</span></b>("/toast");</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">static_cast</span></b>&lt;<b><span style="color: blue;">XmlElement</span></b>^&gt;(toastNode)-&gt;<b><span style="color: blue;">SetAttribute</span></b>("duration", "long");</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">// Até que enfim vamos começar a ver uma luz no fim do túnel!!</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">ToastNotification</span></b>^ toast = <b><span style="color: blue;">ref </span></b><span style="color: blue;"><b>new</b></span>&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">ToastNotification</span></b>(toastXmlDocument);</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">// Demorou mais aqui está:</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b><span style="color: blue;">ToastNotificationManager</span></b>::<span style="color: blue;"><b>CreateToastNotifier</b></span>()-&gt;<b><span style="color: blue;">Show</span></b>(toast);</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">...</span>
+
+<div style="text-align: justify;">
+Bem, confesso que não é a complexidade o que eu estou discutindo aqui, pois como vocês puderam ver acima não é complexo, eu estou reclamando é que um processo tão simples quanto mostrar uma mensagem para um usuário deveria ser algo também simples, resolvido em no máximo duas linhas de codificação. Experimente colocar mais coisas, como um som a ser executado ou mesmo usar outro template mais complexo. Na minha opinião, esta tarefa deveria ser resolvida com algo do tipo:</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: left;">...</span></div>
+<div style="text-align: justify;">
+<b style="font-family: 'Courier New', Courier, monospace; text-align: left;"><span style="color: blue;">ToastNotificationManager</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: left;">::</span><span style="color: blue; font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: left;"><b>CreateToastNotifier</b></span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: left;">("titulo", "texto",&nbsp;</span><b style="font-family: 'Courier New', Courier, monospace; text-align: left;"><span style="color: blue;">ToastNotificationManager</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: left;">::<b><span style="color: blue;">LONG</span></b></span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: left;">)-&gt;</span><b style="font-family: 'Courier New', Courier, monospace; text-align: left;"><span style="color: blue;">Show</span></b><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: left;">();</span></div>
+<div style="text-align: justify;">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace; text-align: left;">...</span></div>
+<div style="text-align: left;">
+
+</div>
+<div style="text-align: left;">
+E pronto, para quê complicar? Vale lembrar que o último trecho de código informado acima não funciona, (ainda!!). Estou desenvolvendo&nbsp;<span style="text-align: justify;">wrappers para encapsular toda esta complexidade em tarefas simples naquele estilo e tão logo eu conclua a importação do projeto para Windows Phone e publique na store da Microsoft eu vou liberar a biblioteca no GitHub.</span></div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+Bem, após digitar as linhas de código acima você irá testar e certamente você vai me xingar (kkkkk) pois o mesmo só irá funcionar se você for nas propriedades do projeto (do projeto, não adianta ir nas propriedades da solução) e setar a propriedade "<b>Toast capable</b>" para <b>Yes</b>, conforme imagem a seguir:</div>
+<div style="text-align: justify;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-Ds-dAM6KUL8/U9erHW2xZEI/AAAAAAAACFA/TnynlGD6HdE/s1600/2014-07-29+11_08_51-V5rz4.png+(1152%C3%97648).png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="170" src="https://3.bp.blogspot.com/-Ds-dAM6KUL8/U9erHW2xZEI/AAAAAAAACFA/TnynlGD6HdE/s1600/2014-07-29+11_08_51-V5rz4.png+(1152%C3%97648).png" width="400" /></a></div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+ps.: Antes que alguém diga que a complexidade se deve à linguagem escolhida, C++/CLI, experimentem fazer o mesmo usando C#. Eu fiz o teste, e para minha surpresa está idêntico ao código postado acima.</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+Bom, até a próxima!</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+
+</div>
+<div style="text-align: justify;">
+<span style="text-align: left;">Fontes de pesquisa:</span></div>
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-372.pdf" target="_blank">ECMA-372.pdf</a>
+<a href="http://en.wikipedia.org/wiki/C%2B%2B/CLI" target="_blank">Wikipedia C++/CLI</a>
+<a href="http://en.wikipedia.org/wiki/Managed_Extensions_for_C%2B%2B" target="_blank">Wikipedia Managed Extensions for C++</a>
+<a href="http://msdn.microsoft.com/en-us/library/68td296t.aspx" target="_blank">Microsof.com - .NET Programming in Visual C++ (C++/CLI)</a>
+<a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761494.aspx" target="_blank">The toast template catalog (Windows Runtime apps)</a>
+
+</div>
