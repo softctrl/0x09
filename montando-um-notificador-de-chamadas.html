@@ -1,0 +1,109 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Bom dia,
+
+Ultimamente tenho sido incomodado pelo inconveniente de ter um aparelho telefônico cujo tom é quase idêntico ao tom do aparelho do interfone. Resultado: Nunca consigo identificar se o som vem do telefone, interfone ou se vem do apartamento ao lado!!!
+
+Pensando nisso, eu me propus a usar algum tipo de identificação visual para o telefone. Imaginei colocar algum circuito contendo um led, e que ao sinal de ligação recebida o mesmo acenderia e me indicaria de modo visual de onde vem o som que eu esteja ouvindo.
+
+Bem, comecei analisando a modo como a linha telefônica se comportava e percebi que a minha linha telefônica se comporta da seguinte maneira:
+
+A tensão do telefone no Gancho e fora do Gancho é de aproximadamente -50v.
+A tensão do telefone quando inicia o recebimento de uma ligação&nbsp;é de aproximadamente&nbsp;8v.
+
+De posse desta informação ficou fácil montar um circuito bastante simples para resolver o meu problema.
+Como em um primeiro momento o circuito contem uma tensão negativa, se eu ligar diretamente o led com a polaridade invertida o mesmo ficará sempre desligado, pois o led sendo um diodo, só funciona se a corrente estiver polarizada no sentido correto. Neste momento eu posso utilizar um resistor para &nbsp;proteger o Led, mais considero interessante inclusive um diodo ligado de modo a não permitir a corrente enquanto o circuito estiver com tensão de ~(-50)v, além de aproveitar a redução da tensão exercida pelo diodo em 0,7v quando o circuito estiver com tensão positiva.
+
+Bem, como uma imagem vale mais do que mil palavras:
+
+Abaixo você vê o modelo do meu telefone, é bem simples, o mais barato que tinha na loja :D
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-m8_YOXOVXqA/UvUqYc-fo_I/AAAAAAAABt4/UKiCZqzNZWA/s1600/img001.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://1.bp.blogspot.com/-m8_YOXOVXqA/UvUqYc-fo_I/AAAAAAAABt4/UKiCZqzNZWA/s1600/img001.JPG" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Eu desmontei o telefone, soldei diretamente na placa na entrada da linha dois fios que serão soldados mais a frente no circuito contendo o led, e na parte superior do telefone fiz um furo onde será fixado o led:</div>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-5drU0vuhScw/UvUqaANJKgI/AAAAAAAABuI/Crpqrnvg-Vs/s1600/img002.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://3.bp.blogspot.com/-5drU0vuhScw/UvUqaANJKgI/AAAAAAAABuI/Crpqrnvg-Vs/s1600/img002.JPG" width="400" /></a></div>
+<div style="text-align: center;">
+<div style="text-align: left;">
+
+</div>
+<div style="text-align: left;">
+
+</div>
+<div style="text-align: left;">
+Aqui, podemos ver claramente o furo onde o led ficará exposto no telefone, no momento como ainda estou em fase de testes, eu deixei os fios fora do aparelho, pois assim eu teria uma maior mobilidade enquanto estava montando o circuito:</div>
+<div style="text-align: left;">
+
+</div>
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-0uuqT-FHMM0/UvUqZgX-BiI/AAAAAAAABuA/uKzq25Nq-Zg/s1600/img003.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://2.bp.blogspot.com/-0uuqT-FHMM0/UvUqZgX-BiI/AAAAAAAABuA/uKzq25Nq-Zg/s1600/img003.JPG" width="400" /></a></div>
+<div style="text-align: center;">
+<div style="text-align: left;">
+
+</div>
+<div style="text-align: left;">
+
+</div>
+<div style="text-align: left;">
+Bem, aqui vem o circuito. É bem simples, sendo que preferi abusar um pouco do preciosismo, e coloquei dois diodos invertidos, para que a redução fosse de ~1,4v e que a corrente somente percorresse o circuito quando a tensão subisse para aproximados 8v:</div>
+</div>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-EbpMjwnLnXw/UvUqd0hOY7I/AAAAAAAABuQ/nLWjdd0ZpgE/s1600/img004.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://4.bp.blogspot.com/-EbpMjwnLnXw/UvUqd0hOY7I/AAAAAAAABuQ/nLWjdd0ZpgE/s1600/img004.JPG" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Bem, agora, basta soldar os componentes, isolar e então soldar o circuito nos fios que já havíamos soldado no telefone:</div>
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-tIBWZ7ZoNIk/UwNN6ZE14gI/AAAAAAAAByc/kKdtDOXXR3E/s1600/img00.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://2.bp.blogspot.com/-tIBWZ7ZoNIk/UwNN6ZE14gI/AAAAAAAAByc/kKdtDOXXR3E/s1600/img00.png" width="400" /></a></div>
+
+
+Após soldar tudo e acomodar dentro do telefone, o resultado esperado é o que vemos na foto a seguir:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-TUHQXsq1sLw/UwNN6Soz5WI/AAAAAAAAByg/Nsyt64BwAyo/s1600/img03.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://4.bp.blogspot.com/-TUHQXsq1sLw/UwNN6Soz5WI/AAAAAAAAByg/Nsyt64BwAyo/s1600/img03.png" width="400" /></a></div>
+
+
+Aqui temos uma vista melhor de como ficou o led no telefone:
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-hA9BDsSMLqo/UwNN6TWIUwI/AAAAAAAAByY/5gMtDGbbO9A/s1600/img02.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="300" src="https://1.bp.blogspot.com/-hA9BDsSMLqo/UwNN6TWIUwI/AAAAAAAAByY/5gMtDGbbO9A/s1600/img02.png" width="400" /></a></div>
+
+
+Bem, concluído o projeto, agora deixo um vídeo onde vocês poderão ver o notificador funcionando perfeitamente &nbsp;:D
+
+<div class="separator" style="clear: both; text-align: center;">
+<object class="BLOG_video_class" contentid="6f40588f628f7633" height="400" id="BLOG_video-6f40588f628f7633" width="400"></object></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Bem, espero que vocês tenham gostado.</div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+<b><span style="color: red;">Aviso: Tomem cuidado caso algum de vocês deseje fazer o mesmo experimento, não aconselho que façam sem o devido conhecimento das teorias envolvidas, ou mesmo sem o acompanhamento de alguém experiente, pois infelizmente não posso me responsabilizar se algum de vocês danificar seus aparelhos telefônicos, ou mesmo sofrer um ataque cardíaco pensando que o fio do telefone não dá choque! Além do que o ferro de solda de 40w (o que eu usei) chega brincando aos 400ºc, o que com um manuseio incorreto lhe dará uma bela lembrança deste artigo!! rsrsrs</span></b></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b><span style="color: red;">Enfim, tomem cuidado.</span></b></div>
+<div class="separator" style="clear: both; text-align: left;">
+
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+Até a próxima.</div>
+</div>
