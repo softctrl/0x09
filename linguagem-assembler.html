@@ -1,0 +1,197 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Olá a todos.
+
+Vou iniciar aqui uma série de posts tratando desta linguagem de programação que considero como uma base para qualquer programador.
+
+Cada computador possui um microprocessador que gerencia o processamento lógico, aritmético e de controle de atividades, e cada família de processadores possui um conjunto de instruções que cuida de todas estas operações. Os processadores entendem somente linguagem de máquina (0's e 1's), mais imagine programar desta forma, seria um tanto masoquista :). Então neste momento entra em ação um conjunto específico de instruções em&nbsp;assembler&nbsp;voltadas para a plataforma alvo do projeto, e que realiza a conversão dos comandos em assembler para os opcodes desta plataforma.
+
+Mais porque mesmo devo aprender esta linguagem?
+
+Bem, você não precisa aprender assembler, mais que tipo de programador você é, ou mesmo deseja ser um dia? Eu aprendi que a diferença entre um programador excepcional e um programador medíocre, é que o primeiro sabe o que realmente acontece quando pressionamos a tecla "A" no teclado do computador, enquanto que o segundo simplesmente acha que a unica coisa que acontece é que a letra vai aparecer no monitor. Aprender assembler nos traz informações valiosas sobre como o computador funciona, a assim podemos nos tornar melhores profissionais, fora que considero um ótimo diferencial no currículo para quem deseja atuar na área de automação, robótica e outros. Agora como vantagens mais específicas podemos considerar:
+
+
+<ul style="text-align: left;"><ul>
+<li>Conhecer melhor a comunicação entre os programa e o sistema operacional, processadores, memória e bios;</li>
+<li>Entender como os dados são representados na memória e em dispositivos externos;</li>
+<li>Como o processador acessa e executa as instruções e como estas instruções acessam e processam dados;</li>
+</ul>
+</ul>
+<div>
+dentre inúmeras outras vantagens.</div>
+<div>
+
+</div>
+<div>
+E principalmente pelas duas vantagens a seguir:</div>
+<div>
+
+</div>
+<div>
+<ul style="text-align: left;"><ul>
+<li>É muito divertido conhecer, entender e usar assembler!!!!</li>
+<li>É fundamental para hackear os sistemas! :D</li>
+</ul>
+</ul>
+<div>
+Antes de darmos início ao aprendizado da linguagem, gostaria de rever alguns conceitos da arquitetura PC.</div>
+</div>
+<div>
+
+</div>
+<div>
+A base do hardware de um PC consiste em processador, memória e registradores. Os registradores são componentes que guardam dados e endereços.&nbsp;</div>
+<div>
+
+</div>
+<div>
+O processador suporta basicamente os seguintes tamanhos de dados:</div>
+<div>
+<ul style="text-align: left;"><ul>
+<li>Word-&gt; 02 bytes</li>
+<li>Doubleword -&gt; 04 bytes (32bits)</li>
+<li>Quadword -&gt; 08 bytes (64bits)</li>
+<li>Paragrafh -&gt; 16 bytes (128bits)</li>
+<li>Kilobyte -&gt; 1024 bytes</li>
+<li>Megabyte -&gt; 1.048.576 bytes</li>
+</ul>
+</ul>
+É interessante também mantermos um certo conhecimento dos números binários e hexadecimais, ambos sistemas numéricos posicionais, sendo que o binário é em potência de 2, e o hexadecimal utiliza a base 16.</div>
+<div>
+
+</div>
+<div>
+O sistema binário possui somente dois elementos [0,1].</div>
+<div>
+O sistema hexadecimal possui somente os elementos [0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F].</div>
+<div>
+
+</div>
+<div>
+Não vou entrar em detalhes nas operações de cada sistema numérico.</div>
+<div>
+
+</div>
+<div>
+Quero informar também que estou utilizando sistema operacional <a href="http://centos.org/" rel="nofollow" target="_blank">Centos</a>, e o compilador assembler <a href="http://www.nasm.us/" rel="nofollow" target="_blank">nasm</a>.</div>
+<div>
+
+</div>
+<div>
+Um programa em assembler é dividido em&nbsp;seções e, por enquanto, utilizaremos basicamente três delas:</div>
+<div>
+<ul style="text-align: left;"><ul>
+<li>Data</li>
+<li>Bss</li>
+<li>Text</li>
+</ul>
+</ul>
+</div>
+
+<div>
+<div>
+
+</div>
+<div>
+A&nbsp;seção&nbsp;<b>data&nbsp;</b>é utilizada para declarar dados inicializados ou mesmo as famosas constantes e as variáveis globais. Como característica principal temos que esta seção não muda em tempo de execução, apesar de ser de leitura e escrita.</div>
+<div>
+Sintaxe:</div>
+<div>
+
+</div>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">section .data</span></div>
+<div>
+
+
+</div>
+<div>
+<div>
+A sessão&nbsp;<b>bss</b>&nbsp;é utilizada para declarar variáveis. É nesta seção que mantemos todas as variáveis globais e as variáveis estáticas que não são explicitamente inicializadas pelo programador.</div>
+<div>
+<div>
+Sintaxe:</div>
+<div>
+
+</div>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">section .bss</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span> <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span></div>
+<div>
+</div>
+<div>
+A&nbsp;seção&nbsp;<b>text</b>&nbsp;é responsável por guardar o código do programa que estamos executando. Aqui é onde realizamos nossas validações de engenharia reversa :D. Um ponto importante aqui é que esta&nbsp;seção&nbsp;deve obrigatoriamente iniciar com a declaração <b>global main</b>, o que indica ao kernel onde o programa inicia.</div>
+</div>
+</div>
+</div>
+<div>
+<div>
+Sintaxe:</div>
+<div>
+
+</div>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">section .text</span></div>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <span style="color: #76a5af;">global</span> main</span></div>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main:</span></div>
+<div>
+</div>
+</div>
+<div>
+
+
+Comentários em assembler devem ser feitos utilizando o ponto-e-vírgula (;)</div>
+<div>
+
+</div>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><span style="color: #76a5af;">mov &nbsp;</span>eax, 0xffffffff <span style="color: #073763;">; Este comando realiza uma operação ...</span></span></div>
+<div>
+
+</div>
+
+
+A sintaxe dos comandos em assembler deve se limitar a um comando por linha e seguir a sintaxe:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">[label] operador [operandos] [; comentários]</span>
+
+Exemplos:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>INC</b> &nbsp; &nbsp;contator ; incrementa a variável contador</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>ADD</b> &nbsp; &nbsp;nota, 2 &nbsp;; adiciona o valor 2 a variável nota</span>
+
+
+Bem, agora que pudemos apresentar uma introdução simples que tal o bom e velho "Alô mundo!!" :D
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>section</b> .text</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; global main &nbsp; &nbsp;; preciso informar isso para o ld</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main:</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <b>mov</b> edx, tam &nbsp; ; tamanho da mensagem</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <b>mov</b> ecx, mens &nbsp;; a mensagem em sí</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <b>mov</b> ebx, 1 &nbsp; &nbsp; ; saida padrão stdout</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <b>mov</b> eax, 4</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; ; código da chamada (sys_write)</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <b>int</b> 0x80</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; ; chama o kernel para executar o sys_write</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <b>mov</b> eax, 1</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; ;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">código da chamada (sys_exit)</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; <b>int</b> 0x80</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp; &nbsp; &nbsp; ;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">chama o kernel para executar o sys_exit</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+</span> <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>section</b> .data</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">mens db 'Alo mundo em assembler!!'&nbsp;</span><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">; nossa string</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">tam equ $ - mens &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; calcular o tamanho da string</span>
+
+Para compilar basta digitar os seguintes comandos:
+
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>nasm</b> -f elf nomedoarquivo</span>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><b>ld</b> -m elf_i386 nomedoarquivo.o</span>
+
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-5lDyFerrJB0/UvTqrMHQ3FI/AAAAAAAABtY/E7BuHpyLG0E/s1600/Screenshot-3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="137" src="https://1.bp.blogspot.com/-5lDyFerrJB0/UvTqrMHQ3FI/AAAAAAAABtY/E7BuHpyLG0E/s1600/Screenshot-3.png" width="400" /></a></div>
+<div style="text-align: center;">
+<span style="font-size: x-small;">Programa sendo compilado, linkado e executado.</span></div>
+
+Bem, espero vocês na continuação.
+
+</div>
